@@ -1,0 +1,13 @@
+# server
+server:
+  port: 9090
+  context-path: /meedesidy
+
+
+# 日志
+logging:
+  file: /tmp/logs/log.log
+  level:
+    org:
+      springframework:
+        web: INFO

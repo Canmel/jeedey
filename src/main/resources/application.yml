@@ -1,0 +1,23 @@
+# server
+server:
+  port: 9090
+  context-path: /
+
+
+# 日志
+logging:
+  file: /tmp/logs/log.log
+  level:
+    org:
+      springframework:
+        web: INFO
+        
+# thymeleaf
+spring:
+  thymeleaf:
+     DEFAULT_PREFIX: classpath:/templates/
+     DEFAULT_SUFFIX: .html
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
