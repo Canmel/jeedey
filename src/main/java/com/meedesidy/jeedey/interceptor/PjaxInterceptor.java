@@ -1,20 +1,18 @@
 package com.meedesidy.jeedey.interceptor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
 import com.meedesidy.jeedey.config.ApplicationStringConfig;
+import com.meedesidy.jeedey.controllers.UsersController;
 
 public class PjaxInterceptor implements HandlerInterceptor {
 	
@@ -25,9 +23,10 @@ public class PjaxInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+		System.out.println("请求:　　" + request.getRequestURI().toString());
+		
 		applicationStringConfig = (ApplicationStringConfig)factory.getBean("getApplicationStringConfig");
 		if(!isPjaxRequest(request) && !request.getRequestURI().toString().equals(applicationStringConfig.getContent_path())) {
-			System.out.println("非Pjax请求并开始跳转主页");
 			response.sendRedirect(applicationStringConfig.getContent_path());
 		}
 		return true;
@@ -44,6 +43,10 @@ public class PjaxInterceptor implements HandlerInterceptor {
 	}
 	
 	private boolean isPjaxRequest(HttpServletRequest request) {
+		if(!StringUtils.isEmpty(request.getParameter("_pjax"))) {
+			System.out.println(request.getParameter("_pjax"));
+			System.out.println("pjax请求......");
+		}
 		return !StringUtils.isEmpty(request.getParameter("_pjax"));
 	}
 

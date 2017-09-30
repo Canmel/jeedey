@@ -1,12 +1,23 @@
 <div class="panel">
+	<div class="panel-body">
+		<form class="dataTables_wrapper form-inline pjax-form" action="/users" method="get" >
+			<input type="hidden" name="_pjax" value="[data-pjax-container]" />
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="dataTables_filter" id="example_filter">
+						<label>邮箱: 
+							<input class="form-control keyDownSubmit" type="text" name="email" th:value="${searchEntity.email}" />
+						</label>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel">
 <div class="panel-body">
 	<div class="adv-table editable-table">
 		<div class="clearfix">
-           <div class="btn-group">
-              <button id="editable-sample_new" class="btn btn-success green">
-              Add New <i class="fa fa-plus"></i>
-              </button>
-           </div>
            <div class="btn-group pull-right">
               <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">选项 <i class="fa fa-angle-down"></i>
               </button>
@@ -18,56 +29,46 @@
         </div>
 		<table class="table table-striped table-hover table-bordered dataTable" id="editable-sample" aria-describedby="editable-sample_info">
             <thead>
-               <tr role="row"><th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" style="width: 182px;" aria-label="Username">Username</th><th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" style="width: 255px;" aria-label="Full Name: activate to sort column ascending">Full Name</th><th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" style="width: 120px;" aria-label="Points: activate to sort column ascending">Points</th><th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" style="width: 171px;" aria-label="Notes: activate to sort column ascending">Notes</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" style="width: 106px;" aria-label="Edit: activate to sort column ascending">Edit</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" style="width: 135px;" aria-label="Delete: activate to sort column ascending">Delete</th></tr>
+            	<tr>
+					<th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample">用户名</th>
+					<th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample">邮箱</th>
+					<th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="editable-sample">电话</th>
+					<th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending">操作</th>
+            	</tr>
             </thead>
             
        		<tbody role="alert" aria-live="polite" aria-relevant="all">
-    			<tr class="odd">
-	               	<td class="  sorting_1">Admin</td>
-	               	<td class="hidden-phone "> Flat Lab</td>
-					<td class="hidden-phone ">462</td>
-					<td class="center hidden-phone ">new user</td>
-					<td class=" "><a class="edit" href="javascript:;"><span class="label label-success">Edit</span></a></td>
-					<td class=" "><a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a></td>
-               	</tr>
-               	
-               	<tr class="even">
-                  <td class="  sorting_1">Admin</td>
-                  <td class="hidden-phone "> Flat Lab</td>
-                  <td class="hidden-phone ">462</td>
-                  <td class="center hidden-phone ">new user</td>
-                  <td class=" "><a class="edit" href="javascript:;"><span class="label label-success">Edit</span></a></td>
-                  <td class=" "><a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a></td>
-               </tr>
-               
-               <tr class="odd">
-                  <td class="  sorting_1">Dulal</td>
-                  <td class="hidden-phone ">Jonathan Smith</td>
-                  <td class="hidden-phone ">434</td>
-                  <td class="center hidden-phone ">new user</td>
-                  <td class=" "><a class="edit" href="javascript:;"><span class="label label-success">Edit</span></a></td>
-                  <td class=" "><a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a></td>
-               </tr>
-               
-               <tr class="even">
-                  <td class="  sorting_1">Dulal</td>
-                  <td class="hidden-phone ">Jonathan Smith</td>
-                  <td class="hidden-phone ">434</td>
-                  <td class="center hidden-phone ">new user</td>
-                  <td class=" "><a class="edit" href="javascript:;"><span class="label label-success">Edit</span></a></td>
-                  <td class=" "><a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a></td>
-               </tr>
-               
-               <tr class="odd">
-                  <td class="  sorting_1">Jhon Doe</td>
-                  <td class="hidden-phone ">Jhon Doe </td>
-                  <td class="hidden-phone ">1234</td>
-                  <td class="center hidden-phone ">super user</td>
-                  <td class=" "><a class="edit" href="javascript:;"><span class="label label-success">Edit</span></a></td>
-                  <td class=" "><a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a></td>
+               	<tr th:each="user,iterStat : ${pageInfo.list}"> 
+                  <td th:text="${user.name}" class="sorting_1">Admin</td>
+                  <td th:text="${user.email}" class="hidden-phone "> Flat Lab</td>
+                  <td th:text="${user.phone}" class="hidden-phone ">462</td>
+                  <td>
+                  <a class="edit" th:href="@{/users/{userId}/edit(userId=${user.id})}" ><span class="label label-success">Edit</span></a>
+                  <a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a>
+                  </td>
                </tr>
 			</tbody>
     	</table>
+    	
+    	<div class="pagination-holder clearfix">
+			<div class="pageDiv"></div>
+		</div>
+		
+		<div th:replace="layout/page"></div>
 	</div>
 </div>
 </div>
+<style>
+.pageDiv{padding: 15px 20px;text-align: right;color: #ccc;clear: both;}
+.pageDiv a{display: inline-block;color: #4c4c4c;background: #f6fbf9;display: inline-block;height: 25px;	line-height: 18px;	padding: 3px 18px;border: 1px solid #ddd;	margin: 0 2px;vertical-align: middle;font-size: 14px;}
+.pageDiv a:hover{text-decoration: none;border: 1px solid #428bca;}
+.pageDiv span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 18px;margin: 0 2px;color: #ed601b;border-radius: 4px;vertical-align: middle;}
+.pageDiv span.disabled{display: inline-block;height: 25px;line-height: 18px;padding: 3px 18px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;vertical-align: middle;}
+.pageDiv span.pagecount{padding: 0 10px;font-size: 14px;color: #999999;margin-right: -30px;}
+.pageDiv span.countYe{color: #4C4C4C;font-size: 14px;margin-left: 30px;}
+.pageDiv span.countYe input{outline: none;border: 1px solid #ddd;height: 25px;padding: 3px 10px;width: 25px;margin: 0 5px;}
+.pageDiv a.turndown{padding: 3px 10px;}
+</style>
+<script>
+	$(".keyDownSubmit").unbind("keydown");
+</script>

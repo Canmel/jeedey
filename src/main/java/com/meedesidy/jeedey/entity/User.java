@@ -1,29 +1,24 @@
 package com.meedesidy.jeedey.entity;
 
-public class User {
+import com.meedesidy.jeedey.entity.enums.Status;
 
-	private String name;
-	
+public class User extends BaseEntity{
+
 	private String email;
 	
 	private String phone;
+	
+	private Status status;
 
 	public User(String name, String email, String phone) {
 		super();
-		this.name = name;
+		super.setName(name);
 		this.email = email;
 		this.phone = phone;
+		this.status = Status.active;
 	}
 	
 	public User() {
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getEmail() {
@@ -40,5 +35,13 @@ public class User {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 }
