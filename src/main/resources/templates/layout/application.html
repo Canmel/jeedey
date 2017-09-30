@@ -51,13 +51,12 @@
       <section id="main-content">
       	<section class="wrapper" data-pjax-container="true" ></section>
       </section>
-      <div th:replace="layout/footer :: footer"></div>
+<!--       <div th:replace="layout/footer :: footer"></div> -->
     </section>
 <script type="text/javascript" th:src="@{javascripts/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/morris.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.pjax-1.8.2.min.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/application.js}"></script>
+<script type="text/javascript" th:src="@{javascripts/jquery.pjax-1.8.2.min.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/jquery.dcjqaccordion.2.7.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/jquery.nicescroll.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/jquery.scrollTo.min.js}"></script>
@@ -67,12 +66,14 @@
 <script type="text/javascript" th:src="@{javascripts/common-scripts.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/count.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/raphael-min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/chart.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/clndr.js}"></script>
+<!-- <script type="text/javascript" th:src="@{javascripts/morris.min.js}"></script> -->
+<!-- <script type="text/javascript" th:src="@{javascripts/chart.js}"></script> -->
 <script type="text/javascript" th:src="@{javascripts/evnt.calendar.init.js}"></script>
 <script type="text/javascript" th:src="@{javascripts/moment-2.2.1.js}"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script><!-- UNDERSCORE JS -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 <script type="text/javascript" th:src="@{javascripts/jquery.knob.js}"></script>
+<script th:src="@{javascripts/jquery.page.js}"></script>
 <script >
    //knob
    $(".knob").knob();
