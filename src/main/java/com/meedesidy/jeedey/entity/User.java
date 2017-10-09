@@ -21,6 +21,10 @@ public class User extends BaseEntity{
 	public User() {
 	}
 
+	public User(int id) {
+		super(id);
+	}
+	
 	public String getEmail() {
 		return email;
 	}

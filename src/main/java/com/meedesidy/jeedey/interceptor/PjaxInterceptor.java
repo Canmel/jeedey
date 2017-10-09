@@ -24,9 +24,9 @@ public class PjaxInterceptor implements HandlerInterceptor {
 			throws Exception {
 		BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
 		System.out.println("请求:　　" + request.getRequestURI().toString());
-		
 		applicationStringConfig = (ApplicationStringConfig)factory.getBean("getApplicationStringConfig");
 		if(!isPjaxRequest(request) && !request.getRequestURI().toString().equals(applicationStringConfig.getContent_path())) {
+			System.out.println("什么情况  来了??");
 			response.sendRedirect(applicationStringConfig.getContent_path());
 		}
 		return true;

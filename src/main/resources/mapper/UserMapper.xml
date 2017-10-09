@@ -20,10 +20,22 @@
          AND users.id = #{id}
     </select>
     
+    <update id="update" parameterType="com.meedesidy.jeedey.entity.User">
+    	UPDATE users set
+    	<trim suffixOverrides=",">
+	    	<if test="name != null"> name = #{name}, </if>
+	    	<if test="email != null"> email = #{email}, </if>
+	    	<if test="phone != null"> phone = #{phone}, </if>
+	    	<if test="status != null"> status = #{status.id}, </if>
+    	</trim>
+    	where id = #{id}
+    </update>
+    
   	<select id="pageQuery" resultMap="userMap">
         <include refid="Base_Query_Sql" />
         <if test="name != null"> AND users.name like CONCAT('%', #{name}, '%')</if>
         <if test="email != null"> AND users.email like CONCAT('%', #{email}, '%')  </if>
+        <if test="status != null"> AND users.status = #{status.id}</if>
         ORDER BY id DESC
     </select>
 	
@@ -43,4 +55,12 @@
 			<if test="status != null and status.id != null"> #{status.id}, </if>
 		</trim>
  	</insert>
+ 	
+ 	<update id="delete"  parameterType="java.util.List">
+ 		UPDATE users SET status = 0 
+ 		WHERE 1 = 1 
+        <foreach collection="array" index="index" item="item" open="and id in(" separator="," close=")">
+        	#{item}
+        </foreach> 
+ 	</update>
 </mapper>
