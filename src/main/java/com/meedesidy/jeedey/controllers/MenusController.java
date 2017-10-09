@@ -18,7 +18,7 @@ import com.meedesidy.jeedey.service.UserService;
 
 @Controller
 @RequestMapping(value = "/users")
-public class UsersController extends BaseController {
+public class MenusController extends BaseController {
 
 	@Autowired
 	private UserService userService;

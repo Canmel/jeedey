@@ -14,4 +14,8 @@ public interface BaseService {
 	public BaseEntity getEntity(BaseEntity entity);
 	
 	public List<BaseEntity> pageQuery(BaseEntity entity);
+	
+	public BaseEntity update(BaseEntity entity);
+	
+	public Object delete(int[] ids);
 }

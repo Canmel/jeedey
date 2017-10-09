@@ -6,7 +6,7 @@
 				<div class="span6">
 					<div class="dataTables_filter" id="example_filter">
 						<label>邮箱: 
-							<input class="form-control keyDownSubmit" type="text" name="email" th:value="${searchEntity.email}" />
+							<input class="form-control keyDownSubmit" type="text" name="email" th:value="${searchEntity == null? null : searchEntity.email}" />
 						</label>
 					</div>
 				</div>
@@ -38,13 +38,13 @@
             </thead>
             
        		<tbody role="alert" aria-live="polite" aria-relevant="all">
-               	<tr th:each="user,iterStat : ${pageInfo.list}"> 
+               	<tr th:each="user,iterStat : ${pageInfo.list}" th:if="${pageInfo != null and pageInfo.list != null}"> 
                   <td th:text="${user.name}" class="sorting_1">Admin</td>
                   <td th:text="${user.email}" class="hidden-phone "> Flat Lab</td>
                   <td th:text="${user.phone}" class="hidden-phone ">462</td>
                   <td>
-                  <a class="edit" th:href="@{/users/{userId}/edit(userId=${user.id})}" ><span class="label label-success">Edit</span></a>
-                  <a class="delete" href="javascript:;"><span class="label label-danger">Delete</span></a>
+                  <a class="edit" th:href="@{/users/{userId}/edit(userId=${user.id})}" ><span class="label label-success">修改</span></a>
+                  <a data-method="get" class="delete" th:value="@{/users/{userId}(userId=${user.id})}"  confirm="确定删除?"><span class="label label-danger">删除</span></a>
                   </td>
                </tr>
 			</tbody>

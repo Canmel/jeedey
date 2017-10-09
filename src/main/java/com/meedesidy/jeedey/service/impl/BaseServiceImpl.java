@@ -23,4 +23,15 @@ public abstract class BaseServiceImpl implements BaseService{
 	public List<BaseEntity> pageQuery(BaseEntity entity) {
 		return getMapper().pageQuery(entity);
 	}
+	
+	@Override
+	public BaseEntity update(BaseEntity entity) {
+		getMapper().update(entity);
+		return getMapper().getEntity(entity);
+	}
+	
+	@Override
+	public Object delete(int[] ids) {
+		return getMapper().delete(ids);
+	}
 }

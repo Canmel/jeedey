@@ -8,8 +8,12 @@ public class BaseEntity {
 	private Integer pageIndex;
 	private Integer totalPage;
 	
+	public BaseEntity(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Integer getPageSize() {
-		
 		return pageSize == null ? 10 : pageSize;
 	}
 

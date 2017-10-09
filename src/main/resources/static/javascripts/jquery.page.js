@@ -67,11 +67,16 @@
 		},
 		//绑定事件
 		bindEvent:function(obj,args){
+			var pathName = "/" + window.location.pathname.split("/")[1] + "?"
+			pathName += $(".dataTables_wrapper").serialize();
 			return (function(){
 				obj.on("click","a.tcdNumber",function(){
 					var current = parseInt($(this).text());
+					var html_str = pathName + "&" + "pageIndex=" + current
+					if(pathName.match("_pjax") == null){
+						html_str += "&_pjax=[data-pjax-container]"
+					}
 					
-					var html_str = window.location.pathname + "?" + "pageIndex=" + current + "&_pjax=[data-pjax-container]"
 					$(this).attr("href", html_str);
 					
 					ms.fillHtml(obj,{"current":current,"pageCount":args.pageCount,"turndown":args.turndown});
@@ -82,8 +87,11 @@
 				//上一页
 				obj.on("click","a.prevPage",function(){
 					var current = parseInt(obj.children("span.current").text());
-					var pindex = current-1
-					var html_str = window.location.pathname + "?" + "pageIndex=" + pindex + "&_pjax=[data-pjax-container]"
+					var pindex = current-1;
+					var html_str = pathName + "&" + "pageIndex=" + pindex;
+					if(pathName.match("_pjax") == null){
+						html_str += "&_pjax=[data-pjax-container]";
+					}
 					$(this).attr("href", html_str);
 					ms.fillHtml(obj,{"current":current-1,"pageCount":args.pageCount,"turndown":args.turndown});
 					if(typeof(args.backFn)=="function"){
@@ -93,9 +101,11 @@
 				//下一页
 				obj.on("click","a.nextPage",function(){
 					var current = parseInt(obj.children("span.current").text());
-					
-					var pindex = current+1
-					var html_str = window.location.pathname + "?" + "pageIndex=" + pindex + "&_pjax=[data-pjax-container]"
+					var pindex = current+1;
+					var html_str = pathName + "&" + "pageIndex=" + pindex;
+					if(pathName.match("_pjax") == null){
+						html_str += "&_pjax=[data-pjax-container]";
+					}
 					$(this).attr("href", html_str);
 					
 					ms.fillHtml(obj,{"current":current+1,"pageCount":args.pageCount,"turndown":args.turndown});
