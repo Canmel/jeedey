@@ -34,9 +34,9 @@ public abstract class BaseController {
 		return new PageInfo<BaseEntity>(list);
 	}
 	
-	public String index(Model model, User user) throws JsonProcessingException {
-		model.addAttribute("pageInfo", indexData(user));
-		model.addAttribute("searchEntity", user);
+	public String index(Model model, BaseEntity entity) throws JsonProcessingException {
+		model.addAttribute("pageInfo", indexData(entity));
+		model.addAttribute("searchEntity", entity);
 		return getContentPath() + "/index";
 	}
 	
@@ -45,19 +45,19 @@ public abstract class BaseController {
 		return getContentPath() + "/edit";
 	}
 	
-	public String create(Model model, User user) {
+	public String create(Model model, BaseEntity entity) {
 		model.addAttribute("user", new User());
 		return getContentPath() + "/new";
 	}
 	
-	public void update(Model model, User user, HttpServletResponse resp) throws IOException {
-		getService().update(user);
+	public void update(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
+		getService().update(entity);
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
 	}
 
 	
-	public void save(Model model, User user, HttpServletResponse resp) throws IOException {
-		getService().insert(user);
+	public void save(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
+		getService().insert(entity);
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
 	}
 	
