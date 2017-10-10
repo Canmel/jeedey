@@ -1,5 +1,7 @@
 package com.meedesidy.jeedey.entity;
 
+import com.meedesidy.jeedey.entity.enums.Status;
+
 public class BaseEntity {
 
 	private Integer id;
@@ -7,7 +9,16 @@ public class BaseEntity {
 	private Integer pageSize;
 	private Integer pageIndex;
 	private Integer totalPage;
-	
+	private Status status;
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public BaseEntity(Integer id) {
 		super();
 		this.id = id;

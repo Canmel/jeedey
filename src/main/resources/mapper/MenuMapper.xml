@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meedesidy.jeedey.mapper.MenuMapper">
+	<resultMap type="com.meedesidy.jeedey.entity.Menu" id="menuMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="desc" property="email" jdbcType="VARCHAR" />
+		<result column="level" property="phone" jdbcType="VARCHAR" />
+		<result column="resource" property="resource" jdbcType="VARCHAR"/>
+		<association property="top" javaType="com.meedesidy.jeedey.entity.Menu">
+			<id column="top_id" property="id" jdbcType="INTEGER"/>
+			<result column="top_name" property="name" jdbcType="VARCHAR"/>
+		</association>
+		<association property="status" javaType="com.meedesidy.jeedey.entity.enums.Status">
+            <id column="status" property="id" jdbcType="INTEGER" />
+        </association>
+	</resultMap>
+	
+	<sql id="Base_Query_Sql">
+		SELECT
+			menus.id, menus.name, menus.level, menus.top, menus.status, menus.resource, 
+			top.id top_id, top.name top_name
+		FROM 
+			menus menus
+			left join menus top on menus.top = top.id
+		WHERE 
+			1=1
+	</sql>
+	
+	<select id="getEntity"  parameterType="INTEGER" resultMap="menuMap">
+        <include refid="Base_Query_Sql" />
+         AND menus.id = #{id}
+    </select>
+    
+    <update id="update" parameterType="com.meedesidy.jeedey.entity.Menu">
+    	UPDATE menus set
+    	<trim suffixOverrides=",">
+	    	<if test="name != null"> name = #{name}, </if>
+	    	<if test="level != null"> level = #{level}, </if>
+	    	<if test="top != null"> top = #{top.id}, </if>
+	    	<if test="status != null"> status = #{status.id}, </if>
+	    	<if test="resource != null"> resource = #{resource}, </if>
+    	</trim>
+    	where id = #{id}
+    </update>
+    
+  	<select id="pageQuery" resultMap="menuMap">
+        <include refid="Base_Query_Sql" />
+        <if test="name != null"> AND menus.name like CONCAT('%', #{name}, '%')</if>
+        <if test="level != null"> AND menus.level = #{level}  </if>
+        <if test="top != null"> AND menus.top = #{top.id}</if>
+        <if test="status != null"> AND menus.status = #{status.id}</if>
+        ORDER BY id DESC
+    </select>
+	
+	<insert id="insert" parameterType="com.meedesidy.jeedey.entity.Menu" useGeneratedKeys="true"  keyProperty="id">
+		INSERT INTO menus 
+		<trim suffixOverrides="," suffix=")" prefix="(">
+			<if test="name != null"> name, </if>
+			<if test="phone != null"> phone, </if>
+			<if test="email != null"> email, </if>
+			<if test="status != null and status.id != null"> status, </if>
+		</trim>
+		VALUES 
+		<trim suffixOverrides="," suffix=")" prefix="(">
+			<if test="name != null"> #{name}, </if>
+			<if test="phone != null"> #{phone}, </if>
+			<if test="email != null"> #{email}, </if>
+			<if test="status != null and status.id != null"> #{status.id}, </if>
+		</trim>
+ 	</insert>
+ 	
+ 	<update id="delete"  parameterType="java.util.List">
+ 		UPDATE menus SET status = 0 
+ 		WHERE 1 = 1 
+        <foreach collection="array" index="index" item="item" open="and id in(" separator="," close=")">
+        	#{item}
+        </foreach> 
+ 	</update>
+</mapper>
