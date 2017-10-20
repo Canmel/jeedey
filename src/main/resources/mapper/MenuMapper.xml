@@ -5,7 +5,6 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="desc" property="email" jdbcType="VARCHAR" />
-		<result column="level" property="phone" jdbcType="VARCHAR" />
 		<result column="resource" property="resource" jdbcType="VARCHAR"/>
 		<association property="top" javaType="com.meedesidy.jeedey.entity.Menu">
 			<id column="top_id" property="id" jdbcType="INTEGER"/>
@@ -13,6 +12,9 @@
 		</association>
 		<association property="status" javaType="com.meedesidy.jeedey.entity.enums.Status">
             <id column="status" property="id" jdbcType="INTEGER" />
+        </association>
+        <association property="level" javaType="com.meedesidy.jeedey.entity.enums.Levels">
+            <id column="level" property="id" jdbcType="INTEGER" />
         </association>
 	</resultMap>
 	
@@ -33,15 +35,16 @@
     </select>
     
     <update id="update" parameterType="com.meedesidy.jeedey.entity.Menu">
-    	UPDATE menus set
+    	UPDATE menus SET
     	<trim suffixOverrides=",">
 	    	<if test="name != null"> name = #{name}, </if>
-	    	<if test="level != null"> level = #{level}, </if>
+	    	<if test="level != null"> level = #{level.id}, </if>
 	    	<if test="top != null"> top = #{top.id}, </if>
+	    	<if test="desc != null"> desc = #{desc}, </if>
 	    	<if test="status != null"> status = #{status.id}, </if>
 	    	<if test="resource != null"> resource = #{resource}, </if>
     	</trim>
-    	where id = #{id}
+    	WHERE id = #{id}
     </update>
     
   	<select id="pageQuery" resultMap="menuMap">
@@ -57,15 +60,19 @@
 		INSERT INTO menus 
 		<trim suffixOverrides="," suffix=")" prefix="(">
 			<if test="name != null"> name, </if>
-			<if test="phone != null"> phone, </if>
-			<if test="email != null"> email, </if>
+			<if test="level != null"> level, </if>
+			<if test="top != null"> top, </if>
+			<if test="resource != null"> resource, </if>
+			<if test="desc != null"> desc, </if>
 			<if test="status != null and status.id != null"> status, </if>
 		</trim>
 		VALUES 
 		<trim suffixOverrides="," suffix=")" prefix="(">
 			<if test="name != null"> #{name}, </if>
-			<if test="phone != null"> #{phone}, </if>
-			<if test="email != null"> #{email}, </if>
+			<if test="level != null"> #{level.id}, </if>
+			<if test="top != null"> #{top.id}, </if>
+			<if test="resource != null"> #{resource}, </if>
+			<if test="desc != null"> #{desc}, </if>
 			<if test="status != null and status.id != null"> #{status.id}, </if>
 		</trim>
  	</insert>
@@ -77,4 +84,10 @@
         	#{item}
         </foreach> 
  	</update>
+ 	
+ 	<select id="getTopMenus" resultMap="menuMap">
+ 		<include refid="Base_Query_Sql"></include>
+ 		AND menus.
+ 		level = 1
+ 	</select>
 </mapper>

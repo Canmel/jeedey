@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.meedesidy.jeedey.entity.Menu;
+import com.meedesidy.jeedey.entity.enums.Levels;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.MenuService;
 
@@ -31,11 +32,16 @@ public class MenusController extends BaseController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String edit(@PathVariable Integer id, Model model) {
+		model.addAttribute("levels", Levels.levelList());
+		model.addAttribute("topMenus",getService().getTopMenus());
 		return super.edit(id, model);
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String create(Model model, Menu menu) {
+		menu.setLevel(Levels.sub_level);
+		model.addAttribute("levels", Levels.levelList());
+		model.addAttribute("topMenus",getService().getTopMenus());
 		return super.create(model, menu);
 	}
 

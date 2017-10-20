@@ -41,12 +41,12 @@ public abstract class BaseController {
 	}
 	
 	public String edit(@PathVariable Integer id, Model model) {
-		model.addAttribute("user", getService().getEntity(new User(id)));
+		model.addAttribute("entity", getService().getEntity(new User(id)));
 		return getContentPath() + "/edit";
 	}
 	
 	public String create(Model model, BaseEntity entity) {
-		model.addAttribute("user", new User());
+		model.addAttribute("entity", entity);
 		return getContentPath() + "/new";
 	}
 	

@@ -43,10 +43,6 @@ public class PjaxInterceptor implements HandlerInterceptor {
 	}
 	
 	private boolean isPjaxRequest(HttpServletRequest request) {
-		if(!StringUtils.isEmpty(request.getParameter("_pjax"))) {
-			System.out.println(request.getParameter("_pjax"));
-			System.out.println("pjax请求......");
-		}
 		return !StringUtils.isEmpty(request.getParameter("_pjax"));
 	}
 

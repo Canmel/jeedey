@@ -1,17 +1,21 @@
 package com.meedesidy.jeedey.entity;
 
+import com.meedesidy.jeedey.entity.enums.Levels;
+
 public class Menu extends BaseEntity{
 	private Menu top;
 
-	private int level;
+	private Levels level;
 	
 	private String resource;
+	
+	private String desc;
 
-	public int getLevel() {
+	public Levels getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(Levels level) {
 		this.level = level;
 	}
 
@@ -31,11 +35,20 @@ public class Menu extends BaseEntity{
 		this.top = top;
 	}
 
-	public Menu(Integer id, Menu top, int level, String resource) {
+	public Menu(Integer id, Menu top, Levels level, String resource, String desc) {
 		super(id);
 		this.top = top;
 		this.level = level;
 		this.resource = resource;
+		this.desc = desc;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 	public Menu(Integer id) {

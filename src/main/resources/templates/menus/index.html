@@ -40,7 +40,7 @@
        		<tbody role="alert" aria-live="polite" aria-relevant="all">
                	<tr th:each="menu,iterStat : ${pageInfo.list}" th:if="${pageInfo != null and pageInfo.list != null}"> 
                   <td th:text="${menu.name}" class="sorting_1">Admin</td>
-                  <td th:text="${menu.level}" class="hidden-phone "> Flat Lab</td>
+                  <td th:text="${menu.level.name}" class="hidden-phone "> Flat Lab</td>
                   <td th:text="${menu.resource}" class="hidden-phone ">462</td>
                   <td>
                   <a class="edit" th:href="@{/menus/{menuId}/edit(menuId=${menu.id})}" ><span class="label label-success">修改</span></a>
@@ -53,7 +53,6 @@
     	<div class="pagination-holder clearfix">
 			<div class="pageDiv"></div>
 		</div>
-		
 		<div th:replace="layout/page"></div>
 	</div>
 </div>

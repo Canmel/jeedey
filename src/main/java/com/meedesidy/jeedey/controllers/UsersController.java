@@ -1,6 +1,8 @@
 package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,7 +24,7 @@ public class UsersController extends BaseController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String index(Model model, User user) throws JsonProcessingException {
 		user.setStatus(Status.active);
@@ -36,13 +38,15 @@ public class UsersController extends BaseController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String create(Model model, User user) {
+		
+		Collections.synchronizedMap(new HashMap<String, String>());
 		return super.create(model, user);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public void update(Model model, User user, HttpServletResponse resp) throws IOException {
 		super.update(model, user, resp);
-	}
+	}	
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void save(Model model, User user, HttpServletResponse resp) throws IOException {
