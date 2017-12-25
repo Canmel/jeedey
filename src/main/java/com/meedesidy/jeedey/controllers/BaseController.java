@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.meedesidy.jeedey.annotation.ModelValidator;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.service.BaseService;
@@ -55,8 +57,9 @@ public abstract class BaseController {
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
 	}
 
-	
+	@Validated
 	public void save(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
+		
 		getService().insert(entity);
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
 	}

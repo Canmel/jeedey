@@ -2,7 +2,7 @@ package com.meedesidy.jeedey.utils;
 
 import java.io.File;
 
-public class RowBack {
+public class RollBack {
 	
 	public static final String modelName = "role";
 	public static final String path = System.getProperty("user.dir") + "/src/main/java/com/meedesidy/jeedey/controllers/";

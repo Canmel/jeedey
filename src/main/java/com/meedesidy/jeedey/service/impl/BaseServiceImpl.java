@@ -2,6 +2,7 @@ package com.meedesidy.jeedey.service.impl;
 
 import java.util.List;
 
+import com.meedesidy.jeedey.annotation.ModelValidator;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.mapper.BaseMapper;
 import com.meedesidy.jeedey.service.BaseService;
@@ -14,7 +15,11 @@ public abstract class BaseServiceImpl implements BaseService{
 	}
 	
 	@Override
+	@ModelValidator
 	public BaseEntity insert(BaseEntity entity) {
+		if (2 == 2) {
+			throw new RuntimeException();
+		}
 		getMapper().insert(entity);
 		return getEntity(entity);
 	}

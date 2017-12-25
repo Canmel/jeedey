@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.meedesidy.jeedesidy.aop.ValidatorAspect;
 import com.meedesidy.jeedey.interceptor.PjaxInterceptor;
 
 @Configuration
@@ -17,8 +18,14 @@ public class JeedesidyConfig extends WebMvcConfigurerAdapter{
 		return new ApplicationStringConfig();
 	}
 	
+	@Bean
+	public ValidatorAspect getValidatorAspect() {
+		return new ValidatorAspect();
+	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new PjaxInterceptor());
 	}
+	
 }

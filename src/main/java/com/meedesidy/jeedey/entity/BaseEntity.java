@@ -1,10 +1,14 @@
 package com.meedesidy.jeedey.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.meedesidy.jeedey.entity.enums.Status;
 
 public class BaseEntity {
 
 	private Integer id;
+	
+	@NotBlank
 	private String name;
 	private Integer pageSize;
 	private Integer pageIndex;

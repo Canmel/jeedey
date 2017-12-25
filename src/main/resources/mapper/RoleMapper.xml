@@ -4,15 +4,14 @@
 	<resultMap type="com.meedesidy.jeedey.entity.Role" id="roleMap">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="email" property="email" jdbcType="VARCHAR" />
-		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="description" property="desc" jdbcType="VARCHAR" />
 		<association property="status" javaType="com.meedesidy.jeedey.entity.enums.Status">
             <id column="status" property="id" jdbcType="INTEGER" />
         </association>
 	</resultMap>
 	
 	<sql id="Base_Query_Sql">
-		SELECT id, name, phone, email, status FROM roles WHERE 1=1
+		SELECT id, name, description, status FROM roles WHERE 1=1
 	</sql>
 	
 	<select id="getEntity"  parameterType="INTEGER" resultMap="roleMap">
@@ -24,8 +23,7 @@
     	UPDATE roles set
     	<trim suffixOverrides=",">
 	    	<if test="name != null"> name = #{name}, </if>
-	    	<if test="email != null"> email = #{email}, </if>
-	    	<if test="phone != null"> phone = #{phone}, </if>
+	    	<if test="desc != null"> description = #{desc}, </if>
 	    	<if test="status != null"> status = #{status.id}, </if>
     	</trim>
     	where id = #{id}
@@ -34,8 +32,8 @@
   	<select id="pageQuery" resultMap="roleMap">
         <include refid="Base_Query_Sql" />
         <if test="name != null"> AND roles.name like CONCAT('%', #{name}, '%')</if>
-        <if test="email != null"> AND roles.email like CONCAT('%', #{email}, '%')  </if>
-        <if test="status != null"> AND roles.status = #{status.id}</if>
+        <if test="desc != null"> AND roles.description like CONCAT('%', #{desc}, '%')  </if>
+        <if test="status != null and status.id != null"> AND roles.status = #{status.id}</if>
         ORDER BY id DESC
     </select>
 	
@@ -43,15 +41,13 @@
 		INSERT INTO roles 
 		<trim suffixOverrides="," suffix=")" prefix="(">
 			<if test="name != null"> name, </if>
-			<if test="phone != null"> phone, </if>
-			<if test="email != null"> email, </if>
+			<if test="desc != null"> description, </if>
 			<if test="status != null and status.id != null"> status, </if>
 		</trim>
 		VALUES 
 		<trim suffixOverrides="," suffix=")" prefix="(">
 			<if test="name != null"> #{name}, </if>
-			<if test="phone != null"> #{phone}, </if>
-			<if test="email != null"> #{email}, </if>
+			<if test="desc != null"> #{desc}, </if>
 			<if test="status != null and status.id != null"> #{status.id}, </if>
 		</trim>
  	</insert>

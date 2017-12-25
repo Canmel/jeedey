@@ -1,17 +1,36 @@
 package com.meedesidy.jeedey.entity;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Length;
+
 public class Menu extends BaseEntity{
 	private Menu top;
 
-	private int level;
+	@Max(value = 2)
+	@Min(value = 1)
+	private Integer level;
 	
+	@Length(max = 20)
+	private String desc;
+	
+	@Length(max = 50, min = 1)
 	private String resource;
 
-	public int getLevel() {
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Integer getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 

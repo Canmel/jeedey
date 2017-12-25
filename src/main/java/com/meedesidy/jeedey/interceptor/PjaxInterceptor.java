@@ -3,7 +3,6 @@ package com.meedesidy.jeedey.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
 import com.meedesidy.jeedey.config.ApplicationStringConfig;
-import com.meedesidy.jeedey.controllers.UsersController;
 
 public class PjaxInterceptor implements HandlerInterceptor {
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.meedesidy.jeedey.annotation.NotRepeat;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.UserService;
@@ -40,7 +41,7 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public void update(Model model, User user, HttpServletResponse resp) throws IOException {
+	public void update(Model model, @NotRepeat User user, HttpServletResponse resp) throws IOException {
 		super.update(model, user, resp);
 	}
 
@@ -48,8 +49,7 @@ public class UsersController extends BaseController {
 	public void save(Model model, User user, HttpServletResponse resp) throws IOException {
 		super.save(model, user, resp);
 	}
-	
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
@@ -59,7 +59,7 @@ public class UsersController extends BaseController {
 	public UserService getService() {
 		return userService;
 	}
-	
+
 	@Override
 	public String getContentPath() {
 		return "/users";

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.meedesidy.jeedey.annotation.NotRepeat;
 import com.meedesidy.jeedey.entity.Menu;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.MenuService;
@@ -45,7 +46,7 @@ public class MenusController extends BaseController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void save(Model model, Menu menu, HttpServletResponse resp) throws IOException {
+	public void save(Model model, @NotRepeat Menu menu, HttpServletResponse resp) throws IOException {
 		super.save(model, menu, resp);
 	}
 	

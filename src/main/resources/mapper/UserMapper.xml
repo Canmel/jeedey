@@ -33,9 +33,6 @@
     
   	<select id="pageQuery" resultMap="userMap">
         <include refid="Base_Query_Sql" />
-        <if test="name != null"> AND users.name like CONCAT('%', #{name}, '%')</if>
-        <if test="email != null"> AND users.email like CONCAT('%', #{email}, '%')  </if>
-        <if test="status != null"> AND users.status = #{status.id}</if>
         ORDER BY id DESC
     </select>
 	
