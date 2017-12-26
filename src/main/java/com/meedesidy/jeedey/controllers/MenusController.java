@@ -2,17 +2,20 @@ package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.meedesidy.jeedey.annotation.NotRepeat;
 import com.meedesidy.jeedey.entity.Menu;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.MenuService;
@@ -46,11 +49,13 @@ public class MenusController extends BaseController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void save(Model model, @NotRepeat Menu menu, HttpServletResponse resp) throws IOException {
-		super.save(model, menu, resp);
+	public ModelAndView save(Model model, @Valid Menu menu, BindingResult result, HttpServletResponse resp, HttpServletRequest request) throws IOException {
+		if (result.hasErrors()) {
+			return getNotValidModelAndView(getContentPath() + "/new", result, menu);
+		}
+		return super.save(model, menu, resp, request);
 	}
-	
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
@@ -60,7 +65,7 @@ public class MenusController extends BaseController {
 	public MenuService getService() {
 		return menuService;
 	}
-	
+
 	@Override
 	public String getContentPath() {
 		return "/menus";

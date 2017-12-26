@@ -1,4 +1,4 @@
-package com.meedesidy.jeedesidy.aop;
+package com.meedesidy.jeedey.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

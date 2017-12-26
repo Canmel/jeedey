@@ -8,7 +8,7 @@ public class BaseEntity {
 
 	private Integer id;
 	
-	@NotBlank
+	@NotBlank(message = "名称不能为空")
 	private String name;
 	private Integer pageSize;
 	private Integer pageIndex;

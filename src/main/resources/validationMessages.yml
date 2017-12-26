@@ -1,0 +1,10 @@
+menu:
+  name:
+  	unique: 菜单名称不能重复
+  level:	
+  	max: 菜单级别为1或2
+  	min: 菜单级别为1或2
+  desc:	
+  	length: 菜单备注长度不超过20个字符
+  resource:
+    length: 菜单地址长度为1-50个字符	

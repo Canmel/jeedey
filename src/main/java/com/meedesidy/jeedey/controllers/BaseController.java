@@ -3,22 +3,34 @@ package com.meedesidy.jeedey.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.groovy.tools.shell.util.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.meedesidy.jeedey.annotation.ModelValidator;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.service.BaseService;
 
+import net.minidev.json.JSONArray;
+
 public abstract class BaseController {
 
+	public MessageSource messageSource;
+	
+	public void BeanValidatorConfig(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+	
 	public abstract BaseService getService();
 	
 	public abstract String getContentPath();
@@ -58,10 +70,11 @@ public abstract class BaseController {
 	}
 
 	@Validated
-	public void save(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
-		
+	public ModelAndView save(Model model, BaseEntity entity, HttpServletResponse resp, HttpServletRequest req) throws IOException {
+		ModelAndView mv = new ModelAndView();
 		getService().insert(entity);
-		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
+		mv.setViewName(req.getRequestURL().toString());
+		return mv;
 	}
 	
 
@@ -69,6 +82,15 @@ public abstract class BaseController {
 		int[] ids = {id};
 		getService().delete(ids);
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
+	}
+	
+	public ModelAndView getNotValidModelAndView(String viewName, BindingResult result, BaseEntity entity) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName(viewName);
+		mv.setStatus(HttpStatus.OK);
+		mv.addObject("errors", result.getFieldErrors());
+		mv.addObject(entity.getClass().getSimpleName().toLowerCase(), entity);
+		return mv;
 	}
 	
 }

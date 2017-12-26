@@ -2,14 +2,18 @@ package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.meedesidy.jeedey.entity.Role;
@@ -45,13 +49,16 @@ public class RolesController extends BaseController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void save(Model model, Role role, HttpServletResponse resp) throws IOException {
-		super.save(model, role, resp);
+	public ModelAndView save(Model model, @Valid Role role, BindingResult result, HttpServletResponse resp, HttpServletRequest req) throws IOException {
+		if (result.hasErrors()) {
+			return getNotValidModelAndView(getContentPath() + "/new", result, role);
+		}
+		return super.save(model, role, resp, req);
 	}
 	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
+	public void delete(Model model, @PathVariable Integer id, BindingResult result, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
 	}
 

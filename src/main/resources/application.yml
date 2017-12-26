@@ -3,7 +3,6 @@ server:
   port: 9090
   context-path: /
 
-
 # 日志
 logging:
   file: /tmp/logs/log.log
@@ -27,6 +26,10 @@ spring:
     password: 1234
   jpa: 
     show-sql: true
+  spring:
+    messages:
+      basename: message
+      encoding: UTF-8
     
 mybatis: 
   mapperLocations: classpath:mapper/*.xml

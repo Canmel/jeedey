@@ -6,16 +6,17 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.Length;
 
 public class Menu extends BaseEntity{
+	
 	private Menu top;
 
-	@Max(value = 2)
-	@Min(value = 1)
+	@Max(value = 2, message = "菜单级别为1或2")
+	@Min(value = 1, message = "菜单级别为1或2")
 	private Integer level;
 	
-	@Length(max = 20)
+	@Length(max = 20, message = "菜单备注长度不超过20个字符")
 	private String desc;
 	
-	@Length(max = 50, min = 1)
+	@Length(max = 50, min = 1, message = "菜单地址长度为1-50个字符")
 	private String resource;
 
 	public String getDesc() {

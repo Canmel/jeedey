@@ -6591,6 +6591,11 @@ ul.chat-user li a:hover {
 	background: #44bab2;
 }
 
+.error-tip {
+	color: #cc6f6f;
+	border-color: #cc6f6f;
+}
+
 .invite-row {
 	background: #E5E8EF;
 	padding: 6px 10px;
