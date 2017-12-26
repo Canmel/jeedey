@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 public class Role extends BaseEntity{
 	
-	@Length(max = 20, message = "菜单备注长度不超过20个字符")
+	@Length(max = 20, message = "角色备注长度不超过20个字符")
 	private String desc;
 
 	public String getDesc() {
