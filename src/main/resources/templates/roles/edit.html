@@ -5,26 +5,35 @@
 			<section class="panel">
 				<header class="panel-heading">
 					<span class="">修改</span> <span class="tools pull-right"> 
-						<a href="/users" class="fa fa-times"></a>
+						<a href="/roles" class="fa fa-times"></a>
 					</span>
 				</header>
 				<div class="panel-body">
 					<form role="form" th:action="@{/roles/{roleId}/(roleId=${entity.id})}" method="post" class="pjax-form" >
 						<div class="form-group">
-							<label>角色名称</label>
+							<label>角色名</label>
 							<div class="iconic-input">
 								<i class="fa fa-bullhorn"></i> <input th:field="${entity.name}"
-									class="form-control" placeholder="输入角色名称" type="text" />
+									class="form-control" placeholder="输入角色名" type="text" />
 							</div>
 						</div>
-						<div class="form-group">
-							<label>备注</label>
+						<!-- <div class="form-group">
+							<label>邮箱</label>
 							<div class="iconic-input right">
 								<i class="fa fa-coffee"></i> <input
-									th:field="${entity.desc}" class="form-control"
-									placeholder="请输入备注" type="text" />
+									th:field="${entity.email}" class="form-control"
+									placeholder="请输入邮箱" type="text" />
 							</div>
-						</div>
+						</div> -->
+
+						<!-- <div class="form-group">
+							<label>手机号</label>
+							<div class="iconic-input right">
+								<i class="fa fa-coffee"></i> <input
+									th:field="${entity.phone}" class="form-control"
+									placeholder="输入手机号" type="text" />
+							</div>
+						</div> -->
 						<input type="hidden" name="_pjax" value="[data-pjax-container]" /> 
 						<button type="提交" class="btn btn-info">Submit</button>
 					</form>
