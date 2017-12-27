@@ -17,9 +17,6 @@ public abstract class BaseServiceImpl implements BaseService{
 	@Override
 	@ModelValidator
 	public BaseEntity insert(BaseEntity entity) {
-		if (2 == 2) {
-			throw new RuntimeException();
-		}
 		getMapper().insert(entity);
 		return getEntity(entity);
 	}

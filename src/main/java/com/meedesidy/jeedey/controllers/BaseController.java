@@ -55,12 +55,12 @@ public abstract class BaseController {
 	}
 	
 	public String edit(@PathVariable Integer id, Model model) {
-		model.addAttribute("user", getService().getEntity(new User(id)));
+		model.addAttribute(getOptName(), getService().getEntity(new User(id)));
 		return getContentPath() + "/edit";
 	}
 	
 	public String create(Model model, BaseEntity entity) {
-		model.addAttribute("user", new User());
+		model.addAttribute(getOptName(), new User());
 		return getContentPath() + "/new";
 	}
 	
@@ -73,7 +73,8 @@ public abstract class BaseController {
 	public ModelAndView save(Model model, BaseEntity entity, HttpServletResponse resp, HttpServletRequest req) throws IOException {
 		ModelAndView mv = new ModelAndView();
 		getService().insert(entity);
-		mv.setViewName(req.getRequestURL().toString());
+		mv.addObject("pageInfo", indexData(entity));
+		mv.setViewName(getContentPath() + "/index");
 		return mv;
 	}
 	
@@ -91,6 +92,10 @@ public abstract class BaseController {
 		mv.addObject("errors", result.getFieldErrors());
 		mv.addObject(entity.getClass().getSimpleName().toLowerCase(), entity);
 		return mv;
+	}
+	
+	public String getOptName() {
+		return getContentPath().substring(1);
 	}
 	
 }
