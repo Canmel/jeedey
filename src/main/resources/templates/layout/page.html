@@ -1,8 +1,8 @@
 <script th:inline="javascript">
 	/*<![CDATA[*/
 		$(".pageDiv").createPage({
-			pageCount:/*[[${pageInfo.pages}]]*/ 9,//总页数
-			current:/*[[${pageInfo.pageNum}]]*/ 1,//当前页
+			pageCount:[[${pageInfo.pages}]],//总页数
+			current:[[${pageInfo.pageNum}]],//当前页
 			turndown:'false',//是否显示跳转框，显示为true，不现实为false,一定记得加上引号...
  		});
 	/*]]>*/

@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.service.BaseService;
-
-import net.minidev.json.JSONArray;
 
 public abstract class BaseController {
 
@@ -36,16 +35,13 @@ public abstract class BaseController {
 	public abstract String getContentPath();
 	
 	public PageInfo<BaseEntity> indexData(BaseEntity entity) {
-		PageHelper.startPage(entity.getPageIndex(), entity.getPageSize());  
-		List<BaseEntity> list = getService().pageQuery(entity);
-		return new PageInfo<BaseEntity>(list);
+		PageInfo<BaseEntity> page = PageHelper.startPage(entity.getPageIndex(), entity.getPageSize()).doSelectPageInfo(()-> getService().pageQuery(entity));
+		return page;
 	}
 	
 	public PageInfo<BaseEntity> indexData(){
-		BaseEntity entity = new BaseEntity(); 
-		PageHelper.startPage(entity.getPageIndex(), entity.getPageSize());  
-		List<BaseEntity> list = getService().pageQuery(entity);
-		return new PageInfo<BaseEntity>(list);
+		PageInfo<BaseEntity> page = PageHelper.startPage(0, 10).doSelectPageInfo(()-> getService().pageQuery(new BaseEntity()));
+		return page;
 	}
 	
 	public String index(Model model, BaseEntity entity) throws JsonProcessingException {
