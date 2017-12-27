@@ -1,8 +1,6 @@
 package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.meedesidy.jeedey.entity.BaseEntity;
@@ -56,7 +53,11 @@ public abstract class BaseController {
 	}
 	
 	public String create(Model model, BaseEntity entity) {
-		model.addAttribute("entity", new User());
+		try {
+			model.addAttribute("entity", entity.getClass().newInstance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return getContentPath() + "/new";
 	}
 	
