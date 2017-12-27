@@ -33,6 +33,10 @@
     
   	<select id="pageQuery" resultMap="userMap">
         <include refid="Base_Query_Sql" />
+    	<if test="name != null"> AND name = #{name} </if>
+    	<if test="email != null"> AND email = #{email} </if>
+    	<if test="phone != null"> AND phone = #{phone} </if>
+    	<if test="status != null and status.id != null"> AND status = #{status.id} </if>
         ORDER BY id DESC
     </select>
 	

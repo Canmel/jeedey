@@ -44,7 +44,7 @@
                   <td th:text="${role.status.name}" class="hidden-phone ">462</td>
                   <td>
                   <a class="edit" th:href="@{/roles/{roleId}/edit(roleId=${role.id})}" ><span class="label label-success">修改</span></a>
-                  <a data-method="get" class="delete" th:value="@{/roles/{roleId}(roleId=${role.id})}"  confirm="确定删除?"><span class="label label-danger">删除</span></a>
+                  <a data-method="get" class="delete" th:value="@{/roles/{roleId}(roleId=${role.id})}"  confirm="确定删除?"><span class="label label-danger" style="cursor:pointer">删除</span></a>
                   </td>
                </tr>
 			</tbody>

@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<sql id="Base_Query_Sql">
-		SELECT id, name, description, status FROM roles WHERE 1=1
+		SELECT id, name, description, status FROM roles WHERE 1=1 AND status = 1
 	</sql>
 	
 	<select id="getEntity"  parameterType="INTEGER" resultMap="roleMap">

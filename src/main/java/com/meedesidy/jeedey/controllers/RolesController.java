@@ -58,7 +58,7 @@ public class RolesController extends BaseController {
 	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public void delete(Model model, @PathVariable Integer id, BindingResult result, HttpServletResponse resp) throws IOException {
+	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
 	}
 
