@@ -19,12 +19,18 @@ build_image:
 
 push_image:
   stage: push_image
+  only:
+    - master
+    - production
   script:
     - docker push $CONTAINER_IMAGE
     - docker rmi $CONTAINER_IMAGE
 
 image_deploy:
   stage: image_deploy
+  only:
+    - master
+    - production
   script: 
     - PROJECT_PATH=`pwd`
     - echo "deployingStart deploying IMAGE to the server..."
