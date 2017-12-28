@@ -1,0 +1,10 @@
+web:
+  image: IMAGE_NAME
+  ports: 
+  - '9090:9090'
+  only:
+    - master
+    - production
+  privileged: true
+  restart: always
+  tty: true
