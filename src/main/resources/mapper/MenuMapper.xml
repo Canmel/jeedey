@@ -19,7 +19,7 @@
 
 	<sql id="Base_Query_Sql">
 		SELECT
-		menus.id menu_id, menus.name menu_name, menus.level menu_level, menus.top_id top_id,
+		menus.id menu_id, menus.name menu_name, menus.level menu_level, menus.top_id menu_top_id,
 		menus.status menu_status, menus.resource menu_resource, menus.description menus_description, 
 		top.id top_id, top.name top_name
 		FROM
@@ -53,7 +53,7 @@
 		<if test="name != null"> AND menus.name like CONCAT('%', #{name}, '%')</if>
 		<if test="level != null"> AND menus.level = #{level}  </if>
 		<if test="top != null"> AND menus.top_id = #{top.id}</if>
-		<if test="desc != null"> AND menus.description = #{desc}</if>
+		<if test="desc != null"> AND menus.description like CONCAT('%', #{desc}, '%')</if>
 		<if test="status != null"> AND menus.status = #{status.id}</if>
 		ORDER BY menus.id DESC
 	</select>
