@@ -1,7 +1,7 @@
 web:
   image: IMAGE_NAME
   ports: 
-  - '9090:9090'
+  - '9091:9090'
   privileged: true
   restart: always
   tty: true
