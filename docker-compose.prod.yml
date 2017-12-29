@@ -3,7 +3,7 @@ web:
   ports: 
   - '9091:9090'
   volumes:
-  - /home/gitlab-runner/.m2/repository:/home/root/.m2/repository
+  - /home/gitlab-runner/.m2/repository:/root/.m2/repository
   privileged: true
   restart: always
   tty: true
