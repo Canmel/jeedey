@@ -1,17 +1,11 @@
 package com.meedesidy.jeedey.controllers;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.codehaus.groovy.tools.shell.util.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -27,7 +21,6 @@ import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.BaseService;
-import com.meedesidy.jeedey.utils.ExcelPoiUitl;
 import com.meedesidy.jeedey.utils.ExcelJxlUitl;
 
 public abstract class BaseController {
@@ -64,7 +57,11 @@ public abstract class BaseController {
 	}
 	
 	public String create(Model model, BaseEntity entity) {
-		model.addAttribute("entity", new User());
+		try {
+			model.addAttribute("entity", entity.getClass().newInstance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return getContentPath() + "/new";
 	}
 	
@@ -100,9 +97,7 @@ public abstract class BaseController {
 	
 	public void export(Model model, User entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
 		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "user", resp);
-		//ExcelPoiUitl.export("用户数据", getService().pageQuery(entity), userMap, resp);
 	}
-	
 	
 	public String getOptName() {
 		return getContentPath().substring(1);
