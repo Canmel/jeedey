@@ -11,6 +11,9 @@ before_script:
 
 build_image:
   stage: build_image
+  only:
+    - master
+    - production
   script:
     - echo "build IMAGE start..."
     - echo $CONTAINER_IMAGE
