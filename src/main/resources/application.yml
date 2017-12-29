@@ -17,6 +17,7 @@ spring:
   aop:
     auto: true
   thymeleaf:
+    DEFAULT_PREFIX: classpath:/templates/
     DEFAULT_SUFFIX: .html
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -33,6 +34,10 @@ spring:
 mybatis: 
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: tk.mapper.model
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
 
 eureka:
   client:

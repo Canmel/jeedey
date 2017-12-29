@@ -1,6 +1,8 @@
 package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +19,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
+import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.BaseService;
+import com.meedesidy.jeedey.utils.ExcelJxlUitl;
 
 public abstract class BaseController {
 
@@ -91,8 +95,11 @@ public abstract class BaseController {
 		return mv;
 	}
 	
+	public void export(Model model, User entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
+		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "user", resp);
+	}
+	
 	public String getOptName() {
 		return getContentPath().substring(1);
 	}
-	
 }
