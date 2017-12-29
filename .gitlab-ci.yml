@@ -24,7 +24,7 @@ build_image:
   script:
     - echo "build IMAGE start..."
     - echo $CONTAINER_IMAGE
-    - mvn clean package
+    - mvn install
     - docker build --pull -t $CONTAINER_IMAGE .
 
 push_image:
