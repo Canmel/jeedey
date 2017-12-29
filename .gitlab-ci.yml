@@ -1,4 +1,5 @@
 stages:
+  - project_test
   - build_image
   - push_image
   - image_deploy
@@ -9,12 +10,21 @@ variables:
 before_script:
   - docker info
 
+project_test:
+  stage: project_test
+  script:
+    - echo "staring test ..."
+    - mvn test
+
 build_image:
   stage: build_image
+  only:
+    - master
+    - production
   script:
     - echo "build IMAGE start..."
     - echo $CONTAINER_IMAGE
-    - mvn install
+    - mvn clean package
     - docker build --pull -t $CONTAINER_IMAGE .
 
 push_image:
