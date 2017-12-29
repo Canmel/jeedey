@@ -1,13 +1,8 @@
 package com.meedesidy.jeedey.interceptor;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.groovy.runtime.ArrayUtil;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -17,8 +12,6 @@ import org.thymeleaf.util.ArrayUtils;
 import org.thymeleaf.util.StringUtils;
 
 import com.meedesidy.jeedey.config.ApplicationStringConfig;
-
-import antlr.collections.List;
 
 public class PjaxInterceptor implements HandlerInterceptor {
 

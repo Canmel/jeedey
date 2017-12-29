@@ -1,0 +1,40 @@
+stages:
+  - build_image
+  - push_image
+  - image_deploy
+  
+variables:
+    CONTAINER_IMAGE: 192.168.2.135:5000/feature_docker_build_$PROJECT_NAME-$GITLAB_USER_ID:latest
+
+before_script:
+  - docker info
+
+build_image:
+  stage: build_image
+  script:
+    - echo "build IMAGE start..."
+    - echo $CONTAINER_IMAGE
+    - mvn install
+    - docker build --pull -t $CONTAINER_IMAGE .
+
+push_image:
+  stage: push_image
+  only:
+    - master
+    - production
+  script:
+    - docker push $CONTAINER_IMAGE
+    - docker rmi $CONTAINER_IMAGE
+
+image_deploy:
+  stage: image_deploy
+  only:
+    - master
+    - production
+  script: 
+    - PROJECT_PATH=`pwd`
+    - echo "deployingStart deploying IMAGE to the server..."
+    - mv docker-compose.prod.yml docker-compose.yml
+    - sed -i -e 's|IMAGE_NAME|'$CONTAINER_IMAGE'|' docker-compose.yml
+    - sed -i -e 's|PROJECT_PATH|'$PROJECT_PATH'|' docker-compose.yml
+    - docker-compose up -d
