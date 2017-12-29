@@ -1,8 +1,7 @@
 # server
 server:
   port: 9090
-  context-path: /meedesidy
-
+  context-path: /
 
 # 日志
 logging:
@@ -10,9 +9,38 @@ logging:
   level:
     org:
       springframework:
-        web: INFO
-        
+        web: DEBUG
+        dao: DEBUG
+
+# thymeleaf
+spring:
+  aop:
+    auto: true
+  thymeleaf:
+    DEFAULT_SUFFIX: .html
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.135:3306/jeedey?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: sunrise
+  jpa: 
+    show-sql: true
+  spring:
+    messages:
+      basename: message
+      encoding: UTF-8
+    
+mybatis: 
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: tk.mapper.model
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/       
+      defaultZone: http://127.0.0.1:8761/eureka/
+     
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
