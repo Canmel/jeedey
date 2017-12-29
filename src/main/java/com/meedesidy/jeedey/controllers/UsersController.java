@@ -1,6 +1,7 @@
 package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.meedesidy.jeedey.annotation.NotRepeat;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.entity.enums.Status;
+import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.UserService;
 
 @Controller
@@ -50,7 +52,8 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView save(Model model, @Valid User user, BindingResult result, HttpServletResponse resp, HttpServletRequest req) throws IOException {
+	public ModelAndView save(Model model, @Valid User user, BindingResult result, HttpServletResponse resp,
+			HttpServletRequest req) throws IOException {
 		if (result.hasErrors()) {
 			return getNotValidModelAndView(getContentPath() + "/new", result, user);
 		}
@@ -60,6 +63,20 @@ public class UsersController extends BaseController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
+	}
+
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
+	public void export(Model model, User user, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
+		user.setStatus(Status.active);
+		System.out.println(req.getRequestURL() + "               <-----");
+		super.export(model, user, userMap, resp);
+	}
+	
+	public final static LinkedHashMap<String, String> userMap = new LinkedHashMap<String, String>();
+	static {
+		userMap.put("name", "姓名");
+		userMap.put("phone", "电话");
+		userMap.put("email", "邮箱");
 	}
 
 	@Override

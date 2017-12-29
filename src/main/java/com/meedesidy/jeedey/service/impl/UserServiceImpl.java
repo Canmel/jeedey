@@ -7,13 +7,15 @@ import com.meedesidy.jeedey.mapper.UserMapper;
 import com.meedesidy.jeedey.service.UserService;
 
 @Service(value = "userService")
-public class UserServiceImpl extends BaseServiceImpl implements	UserService{
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Override
 	public UserMapper getMapper() {
 		return userMapper;
 	}
+
+	
 }
