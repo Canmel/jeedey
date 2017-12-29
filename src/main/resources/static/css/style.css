@@ -3294,6 +3294,7 @@ ul.amounts li {
 
 .dataTables_filter {
 	float: right;
+	display: inline-flex;
 }
 
 .dataTables_length select {
