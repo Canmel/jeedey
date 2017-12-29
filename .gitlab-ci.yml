@@ -9,12 +9,6 @@ variables:
 before_script:
   - docker info
 
-project_test:
-  stage: project_test
-  script:
-    - echo "staring test ..."
-    - mvn test
-
 build_image:
   stage: build_image
   only:
