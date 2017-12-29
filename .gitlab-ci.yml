@@ -1,5 +1,4 @@
 stages:
-  - project_test
   - build_image
   - push_image
   - image_deploy
