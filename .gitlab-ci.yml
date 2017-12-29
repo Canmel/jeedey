@@ -15,7 +15,6 @@ build_image:
     - echo "build IMAGE start..."
     - echo $CONTAINER_IMAGE
     - mvn install
-    - docker rmi $CONTAINER_IMAGE
     - docker build --pull -t $CONTAINER_IMAGE .
 
 push_image:
