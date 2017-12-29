@@ -1,4 +1,5 @@
 stages:
+  - test_project
   - build_image
   - push_image
   - image_deploy
@@ -8,6 +9,17 @@ variables:
 
 before_script:
   - docker info
+  - rm -rf src/main/resources/application.yml
+  - mv src/main/resources/application-prod.yml src/main/resources/application.yml
+  
+  
+
+test_project:
+  stage: test_project
+  script:
+    - echo "build IMAGE start..."
+    - echo $CONTAINER_IMAGE
+    - mvn test
 
 build_image:
   stage: build_image
