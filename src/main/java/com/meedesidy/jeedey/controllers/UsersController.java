@@ -68,7 +68,6 @@ public class UsersController extends BaseController {
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void export(Model model, User user, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
 		user.setStatus(Status.active);
-		System.out.println(req.getRequestURL() + "               <-----");
 		super.export(model, user, userMap, resp);
 	}
 	

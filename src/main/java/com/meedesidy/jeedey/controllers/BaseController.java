@@ -67,7 +67,7 @@ public abstract class BaseController {
 	
 	public void update(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
 		getService().update(entity);
-		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
+		resp.sendRedirect("/" + getContentPath() + "?_pjax=[data-pjax-container]");
 	}
 
 	@Validated
@@ -83,7 +83,7 @@ public abstract class BaseController {
 	public void delete(Model model, Integer id, HttpServletResponse resp) throws IOException {
 		int[] ids = {id};
 		getService().delete(ids);
-		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
+		resp.sendRedirect("/" + getContentPath() + "?_pjax=[data-pjax-container]");
 	}
 	
 	public ModelAndView getNotValidModelAndView(String viewName, BindingResult result, BaseEntity entity) {

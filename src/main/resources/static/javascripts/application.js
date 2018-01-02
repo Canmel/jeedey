@@ -15,6 +15,11 @@ $(function() {
 	$(document).on('pjax:end', function() {
 		$(".edit").click(function() {
 		});
+		
+//		$(".delete").click(function(){
+//			if(confirm('确定删除?')==false)return false;
+//			$.get($(this).attr("value"), {'_pjax': '[data-pjax-container]'});
+//		});
 
 		$('#export_btn').bind("click", function() {
 			var h = window.location.href;
