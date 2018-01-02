@@ -21,7 +21,7 @@ import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.MenuService;
 
 @Controller
-@RequestMapping(value = "/menus")
+@RequestMapping(value = "menus")
 public class MenusController extends BaseController {
 
 	@Autowired
@@ -68,6 +68,6 @@ public class MenusController extends BaseController {
 
 	@Override
 	public String getContentPath() {
-		return "/menus";
+		return "menus";
 	}
 }

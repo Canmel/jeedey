@@ -24,7 +24,7 @@ import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.UserService;
 
 @Controller
-@RequestMapping(value = "/users")
+@RequestMapping(value = "users")
 public class UsersController extends BaseController {
 
 	@Autowired
@@ -86,6 +86,6 @@ public class UsersController extends BaseController {
 
 	@Override
 	public String getContentPath() {
-		return "/users";
+		return "users";
 	}
 }
