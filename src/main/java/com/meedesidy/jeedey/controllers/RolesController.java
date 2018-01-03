@@ -21,7 +21,7 @@ import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.service.RoleService;
 
 @Controller
-@RequestMapping(value = "/roles")
+@RequestMapping(value = "roles")
 public class RolesController extends BaseController {
 
 	@Autowired
@@ -72,6 +72,6 @@ public class RolesController extends BaseController {
 	
 	@Override
 	public String getContentPath() {
-		return "/roles";
+		return "roles";
 	}
 }

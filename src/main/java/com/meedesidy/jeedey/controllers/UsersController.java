@@ -24,7 +24,7 @@ import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.UserService;
 
 @Controller
-@RequestMapping(value = "/users")
+@RequestMapping(value = "users")
 public class UsersController extends BaseController {
 
 	@Autowired
@@ -71,7 +71,6 @@ public class UsersController extends BaseController {
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void export(Model model, User user, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
 		user.setStatus(Status.active);
-		System.out.println(req.getRequestURL() + "               <-----");
 		super.export(model, user, userMap, resp);
 	}
 	
@@ -89,6 +88,6 @@ public class UsersController extends BaseController {
 
 	@Override
 	public String getContentPath() {
-		return "/users";
+		return "users";
 	}
 }

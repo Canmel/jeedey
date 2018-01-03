@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class FinalExceptionHandler implements ErrorController{
 
-	private static final String ERROR_PAGE = "/error"; 
+	private static final String ERROR_PAGE = "error"; 
 	
 	@Override
 	public String getErrorPath() {
