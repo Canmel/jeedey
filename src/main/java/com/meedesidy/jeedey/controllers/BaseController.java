@@ -52,29 +52,37 @@ public abstract class BaseController {
 	}
 	
 	public String edit(@PathVariable Integer id, Model model) {
-		model.addAttribute("entity", getService().getEntity(new User(id)));
+		model.addAttribute(getOptName(), getService().getEntity(new User(id)));
 		return getContentPath() + "/edit";
 	}
 	
 	public String create(Model model, BaseEntity entity) {
 		try {
-			model.addAttribute("entity", entity.getClass().newInstance());
+			model.addAttribute(getOptName(), entity.getClass().newInstance());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return getContentPath() + "/new";
 	}
 	
-	public void update(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
+	public ModelAndView update(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
 		getService().update(entity);
 		resp.sendRedirect(getContentPath() + "?_pjax=[data-pjax-container]");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pageInfo", indexData(entity));
+		mv.setViewName(getContentPath() + "/index");
+		return mv;
 	}
 
 	@Validated
 	public ModelAndView save(Model model, BaseEntity entity, HttpServletResponse resp, HttpServletRequest req) throws IOException {
 		ModelAndView mv = new ModelAndView();
 		getService().insert(entity);
-		mv.addObject("pageInfo", indexData(entity));
+		try {
+			mv.addObject("pageInfo", indexData(entity.getClass().newInstance()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		mv.setViewName(getContentPath() + "/index");
 		return mv;
 	}
@@ -96,10 +104,10 @@ public abstract class BaseController {
 	}
 	
 	public void export(Model model, User entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
-		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "user", resp);
+		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "excel", resp);
 	}
 	
 	public String getOptName() {
-		return getContentPath().substring(1);
+		return getContentPath().substring(1, getContentPath().length()-1);
 	}
 }

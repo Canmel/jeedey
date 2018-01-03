@@ -44,8 +44,11 @@ public class RolesController extends BaseController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public void update(Model model, Role role, HttpServletResponse resp) throws IOException {
-		super.update(model, role, resp);
+	public ModelAndView update(Model model,@Valid Role role, BindingResult result, HttpServletResponse resp) throws IOException {
+		if (result.hasErrors()) {
+			return getNotValidModelAndView(getContentPath() + "/edit", result, role);
+		}
+		return super.update(model, role, resp);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

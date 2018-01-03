@@ -47,8 +47,11 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public void update(Model model, @NotRepeat User user, HttpServletResponse resp) throws IOException {
-		super.update(model, user, resp);
+	public ModelAndView update(Model model, @Valid User user, BindingResult result, HttpServletResponse resp) throws IOException {
+		if (result.hasErrors()) {
+			return getNotValidModelAndView(getContentPath() + "/edit", result, user);
+		}
+		return super.update(model, user, resp);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)

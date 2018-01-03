@@ -13,7 +13,7 @@
 						<div class="form-group">
 							<label>用户名</label>
 							<div class="iconic-input">
-								<i class="fa fa-bullhorn"></i> <input th:field="${entity.name}"
+								<i class="fa fa-bullhorn"></i> <input th:field="${role.name}"
 									class="form-control" placeholder="输入角色名称" type="text" />
 							</div>
 						</div>
@@ -21,9 +21,16 @@
 							<label>备注</label>
 							<div class="iconic-input right">
 								<i class="fa fa-coffee"></i> <input
-									th:field="${entity.desc}" class="form-control"
+									th:field="${role.desc}" class="form-control"
 									placeholder="请输入备注" type="text" />
 							</div>
+						</div>
+						<div class="form-group">
+							<label>级别</label> <select th:field="${role.status.id}"
+								class="form-control" type="text">
+								<option value="1">正常</option>
+								<option value="0">删除</option>
+							</select>
 						</div>
 						<input type="hidden" name="_pjax" value="[data-pjax-container]" /> 
 						<button type="Submit" class="btn btn-info">提交</button>

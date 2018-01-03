@@ -4,10 +4,14 @@
 			<input type="hidden" name="_pjax" value="[data-pjax-container]" />
 			<div class="row-fluid">
 				<div class="span6">
-					<div class="dataTables_filter" id="example_filter">
+					<div class="dataTables_filter" id="example_filter" style="width: 530px;">
 						<label>名称: 
 							<input class="form-control keyDownSubmit" type="text" name="name" th:value="${searchEntity == null? null : searchEntity.name}" />
 						</label>
+						<label>备注: 
+							<input class="form-control keyDownSubmit" type="text" name="desc" th:value="${searchEntity == null? null : searchEntity.desc}" />
+						</label>
+						<button type="提交" class="btn btn-info">查询</button>
 					</div>
 				</div>
 			</div>
