@@ -9,20 +9,16 @@ logging:
   level:
     org:
       springframework:
-        web: INFO
-        dao: INFO
+        web: DEBUG
+        dao: DEBUG
 
 # thymeleaf
 spring:
   aop:
     auto: true
   thymeleaf:
-    suffix: .html
-    prefix: classpath:/templates/
-    encoding: UTF-8
-    mode: LEGACYHTML5
-    content-type: text/html
-    cache: false
+    DEFAULT_PREFIX: classpath:/templates/
+    DEFAULT_SUFFIX: .html
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/jeedey?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -37,7 +33,7 @@ spring:
     encoding: UTF-8
     
 mybatis: 
-  mapperLocations: classpath:/mapper/*.xml
+  mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: tk.mapper.model
   mvc:
     view:
