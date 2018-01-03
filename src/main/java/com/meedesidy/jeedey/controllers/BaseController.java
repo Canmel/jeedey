@@ -103,7 +103,7 @@ public abstract class BaseController {
 		return mv;
 	}
 	
-	public void export(Model model, User entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
+	public void export(Model model, BaseEntity entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
 		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "excel", resp);
 	}
 	

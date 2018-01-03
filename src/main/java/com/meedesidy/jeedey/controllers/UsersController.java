@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.meedesidy.jeedey.annotation.NotRepeat;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
@@ -74,6 +73,7 @@ public class UsersController extends BaseController {
 		super.export(model, user, userMap, resp);
 	}
 	
+	// 导出excel表头
 	public final static LinkedHashMap<String, String> userMap = new LinkedHashMap<String, String>();
 	static {
 		userMap.put("name", "姓名");

@@ -1,6 +1,7 @@
 package com.meedesidy.jeedey.controllers;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.meedesidy.jeedey.entity.Role;
 import com.meedesidy.jeedey.entity.enums.Status;
+import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.RoleService;
 
 @Controller
@@ -59,10 +61,23 @@ public class RolesController extends BaseController {
 		return super.save(model, role, resp, req);
 	}
 	
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public void delete(Model model, @PathVariable Integer id, HttpServletResponse resp) throws IOException {
 		super.delete(model, id, resp);
+	}
+	
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
+	public void export(Model model, Role role, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
+		role.setStatus(Status.active);
+		super.export(model, role, roleMap, resp);
+	}
+	
+	// 导出excel表头
+	public final static LinkedHashMap<String, String> roleMap = new LinkedHashMap<String, String>();
+	static {
+		roleMap.put("name", "角色名称");
+		roleMap.put("desc", "备注");
+		roleMap.put("status.name", "状态");
 	}
 
 	@Override
