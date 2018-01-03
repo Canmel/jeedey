@@ -1,6 +1,8 @@
 package com.meedesidy.jeedey;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +16,7 @@ import com.meedesidy.jeedey.utils.DataBaseUtils;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringBootTest(classes = JeedeyApplication.class)
-public class BaseTest extends AbstractJUnit4SpringContextTests {
+public class JeedeyApplicationTest extends AbstractJUnit4SpringContextTests {
 
 	@Autowired
 	public DataBaseUtils dataBaseUtils;
@@ -26,4 +28,11 @@ public class BaseTest extends AbstractJUnit4SpringContextTests {
 	public void setUp() throws Exception {
 		dataBaseUtils.runScript();
 	}
+	
+	@Test
+	public void test() {
+		Integer te = 1;
+		Assert.assertTrue("测试一个基类", te == 1);
+	}
+	
 }

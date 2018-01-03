@@ -14,14 +14,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.github.pagehelper.PageInfo;
-import com.meedesidy.jeedey.BaseTest;
+import com.meedesidy.jeedey.JeedeyApplicationTest;
 import com.meedesidy.jeedey.entity.User;
 import com.meedesidy.jeedey.utils.ErrorStrings;
 
-public class UsersControllerTest extends BaseTest {
+public class UsersControllerTest extends JeedeyApplicationTest {
 
 	private MockMvc mockMvc;
 	
@@ -33,9 +32,9 @@ public class UsersControllerTest extends BaseTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     }
 	
-	@Test
 	@Transactional
 	@SuppressWarnings("unchecked")
+	@Test
 	public void index() throws Exception {
 		MvcResult result = mockMvc.perform(get("/users")).andExpect(status().is3xxRedirection()).andReturn();
 		Assert.assertTrue(ErrorStrings.RESPONSE_VIEW_NAME, result.getModelAndView().getViewName().equals("users/index"));
@@ -44,7 +43,6 @@ public class UsersControllerTest extends BaseTest {
 	}
 	
 	@Test
-	@SuppressWarnings("unlikely-arg-type")
 	public void postTest() throws Exception {
 		MultiValueMap<String, String> map = new HttpHeaders();
 		map.add("name", "indexTest");
