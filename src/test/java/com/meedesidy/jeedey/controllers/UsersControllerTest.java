@@ -27,15 +27,14 @@ public class UsersControllerTest extends JeedeyApplicationTest {
 	private int initUserNum = 4;
 	
 	@Before
-	@Transactional
     public void setupMockMvc() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     }
 	
+	@Test
 	@Transactional
 	@SuppressWarnings("unchecked")
-	@Test
-	public void index() throws Exception {
+	public void indexSuccess() throws Exception {
 		MvcResult result = mockMvc.perform(get("/users")).andExpect(status().is3xxRedirection()).andReturn();
 		Assert.assertTrue(ErrorStrings.RESPONSE_VIEW_NAME, result.getModelAndView().getViewName().equals("users/index"));
 		Assert.assertTrue(ErrorStrings.RESPONSE_MODEL_SIZE, ((PageInfo<User>)(result.getModelAndView().getModel().get("pageInfo"))).getList().size() == this.initUserNum);
@@ -43,7 +42,13 @@ public class UsersControllerTest extends JeedeyApplicationTest {
 	}
 	
 	@Test
-	public void postTest() throws Exception {
+	public void indexWithParams() {
+		
+	}
+	
+	@Test
+	@Transactional
+	public void saveSuccess() throws Exception {
 		MultiValueMap<String, String> map = new HttpHeaders();
 		map.add("name", "indexTest");
 		map.add("email", "test@tt.com");
@@ -61,5 +66,56 @@ public class UsersControllerTest extends JeedeyApplicationTest {
 		Assert.assertTrue(ErrorStrings.RESPONSE_MODEL_TYPE, lastValue.equals(map.get("email").get(0)));;
 	}
 	
+	@Test
+	@Transactional
+	public void saveValidFaild() throws Exception {
+		
+	}
+	
+	@Test
+	@Transactional
+	public void saveValidWithSameEmail() throws Exception {
+		
+	}
+	
+	@Test
+	public void editSuccess() {
+		
+	}
+	
+	@Test
+	public void editWithWrongArgs() {
+		
+	}
+	
+	@Test
+	public void createSuccess() {
+		
+	}
+	
+	@Test
+	public void updateSuccess() {
+		
+	}
+	
+	@Test
+	public void updateValidFaild() {
+		
+	}
+	
+	@Test 
+	public void updateWithSameEmail() {
+		
+	}
+	
+	@Test
+	public void deleteSuccess() {
+		
+	}
+	
+	@Test
+	public void getContentPathSuccess() {
+		
+	}
 
 }
