@@ -4,10 +4,14 @@
 			<input type="hidden" name="_pjax" value="[data-pjax-container]" />
 			<div class="row-fluid">
 				<div class="span6">
-					<div class="dataTables_filter" id="example_filter">
+					<div class="dataTables_filter" id="example_filter" style="width: 530px;">
 						<label>名称: 
 							<input class="form-control keyDownSubmit" type="text" name="name" th:value="${searchEntity == null? null : searchEntity.name}" />
 						</label>
+						<label>备注: 
+							<input class="form-control keyDownSubmit" type="text" name="desc" th:value="${searchEntity == null? null : searchEntity.desc}" />
+						</label>
+						<button type="提交" class="btn btn-info">查询</button>
 					</div>
 				</div>
 			</div>
@@ -44,7 +48,7 @@
                   <td th:text="${role.status.name}" class="hidden-phone ">462</td>
                   <td>
                   <a class="edit" th:href="@{/roles/{roleId}/edit(roleId=${role.id})}" ><span class="label label-success">修改</span></a>
-                  <a data-method="get" class="delete" th:value="@{/roles/{roleId}(roleId=${role.id})}"  confirm="确定删除?"><span class="label label-danger" style="cursor:pointer">删除</span></a>
+                  <a method="DELETE" class="delete" th:href="@{/roles/{roleId}(roleId=${role.id})}"  onclick="if(confirm('确定删除?')==false)return false;"><span class="label label-danger" style="cursor:pointer">删除</span></a>
                   </td>
                </tr>
 			</tbody>

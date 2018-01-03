@@ -16,7 +16,7 @@ public class BaseEntity {
 	private Status status;
 
 	public Status getStatus() {
-		return status;
+		return status == null ? Status.active : this.status;
 	}
 
 	public void setStatus(Status status) {
