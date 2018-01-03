@@ -25,17 +25,20 @@ public class BaseEnum {
         this.name = name;
     }
  
-    public static BaseEnum getEnumByInd(Class clazz, int id) {
+    @SuppressWarnings("rawtypes")
+	public static BaseEnum getEnumByInd(Class clazz, int id) {
         return getBaseEnum(clazz, id, null, null);
  
     }
  
-    public static BaseEnum getEnumByCode(Class clazz, String code) {
+    @SuppressWarnings("rawtypes")
+	public static BaseEnum getEnumByCode(Class clazz, String code) {
         return getBaseEnum(clazz, -1, code, null);
  
     }
  
-    public static BaseEnum getEnumByName(Class clazz, String name) {
+    @SuppressWarnings("rawtypes")
+	public static BaseEnum getEnumByName(Class clazz, String name) {
         return getBaseEnum(clazz, -1, null, name);
     }
  
@@ -43,7 +46,8 @@ public class BaseEnum {
         return getList(getClass(), -1, null, null);
     }
  
-    private static BaseEnum getBaseEnum(Class clazz, int id, String code,
+    @SuppressWarnings("rawtypes")
+	private static BaseEnum getBaseEnum(Class clazz, int id, String code,
             String name) {
         try {
             List<BaseEnum> enums = getList(clazz.newInstance(), id, code, name);

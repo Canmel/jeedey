@@ -3,10 +3,7 @@ package com.meedesidy.jeedey.utils;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +26,7 @@ public class DataBaseUtils {
 	@Value("${spring.datasource.driver-class-name}")
 	protected String driver;
 	
-	public void runScript() throws Exception {
+	public void runInitScript() throws Exception {
 		try {
 			Class.forName(driver).newInstance();  
 			Connection conn = (Connection) DriverManager.getConnection(url, username, password);
@@ -81,5 +78,23 @@ public class DataBaseUtils {
 		
 		return result;
 	}
-	
+
+	public Integer getLastIntegerColumValue(String lastSql, String columName) throws Exception {
+		Integer result = null;
+		try {
+			Class.forName(driver).newInstance();  
+			Connection conn = (Connection) DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = conn.clientPrepareStatement(lastSql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(columName);
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

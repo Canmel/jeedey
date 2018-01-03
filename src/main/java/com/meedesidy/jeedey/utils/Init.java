@@ -58,6 +58,7 @@ public class Init {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
+	@SuppressWarnings("resource")
 	public static String getControllerStr(String modelName) throws FileNotFoundException {
 		File fileout = new File(System.getProperty("user.dir")
 				+ "/src/main/java/com/meedesidy/jeedey/controllers/UsersController.java");
@@ -90,6 +91,7 @@ public class Init {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
+	@SuppressWarnings("resource")
 	public static String getServiceStr(String modelName) throws FileNotFoundException {
 		File fileout = new File(
 				System.getProperty("user.dir") + "/src/main/java/com/meedesidy/jeedey/service/UserService.java");

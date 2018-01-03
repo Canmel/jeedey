@@ -1,5 +1,6 @@
 package com.meedesidy.jeedey;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class JeedeyApplicationTest extends AbstractJUnit4SpringContextTests {
 	
 	@Before
 	public void setUp() throws Exception {
-		dataBaseUtils.runScript();
+		dataBaseUtils.runInitScript();
 	}
 	
 	@Test

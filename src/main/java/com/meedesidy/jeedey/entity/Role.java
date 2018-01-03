@@ -1,7 +1,5 @@
 package com.meedesidy.jeedey.entity;
 
-import org.hibernate.validator.constraints.Length;
-
 public class Role extends BaseEntity{
 	
 	private String desc;
