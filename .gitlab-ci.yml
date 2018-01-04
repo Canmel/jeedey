@@ -9,6 +9,7 @@ variables:
 
 before_script:
   - docker info
+  - mv src/main/resources/application-test.yml src/main/resources/application.yml
   
 
 test_project:
