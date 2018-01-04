@@ -33,7 +33,7 @@ public class DataBaseUtils {
 			ScriptRunner runner = new ScriptRunner(conn, false, false);  
 			runner.setErrorLogWriter(null);  
 			runner.setLogWriter(null);  
-			runner.runScript(Resources.getResourceAsReader("dataSql.sql"));  
+			runner.runScript(Resources.getResourceAsReader("conf/init.sql"));  
 			System.out.println("end...");
 		} catch (Exception e) {
 			e.printStackTrace();
