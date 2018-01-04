@@ -24,4 +24,4 @@ nbdist/
 .nb-gradle/
 .DS_Store 
 */.DS_Store
-*/application*.yml
+application*.yml
