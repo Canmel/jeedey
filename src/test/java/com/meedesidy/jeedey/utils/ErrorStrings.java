@@ -9,4 +9,6 @@ public class ErrorStrings {
 	public final static String RESPONSE_VIEW_NAME = "返回的视图名称不正确";
 	
 	public final static String RESPONSE_MODEL_SIZE = "返回MODEL大小不正确";
+	
+	public final static String RESPONSE_MODEL_FEILD = "返回MODEL值不正确";
 }
