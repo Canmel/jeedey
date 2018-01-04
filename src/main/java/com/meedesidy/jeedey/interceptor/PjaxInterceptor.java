@@ -15,7 +15,7 @@ import com.meedesidy.jeedey.config.ApplicationStringConfig;
 
 public class PjaxInterceptor implements HandlerInterceptor {
 
-	private static String[] DEFINE_PATH = { "/error", "/notFound", "/refused" };
+	private static String[] DEFINE_PATH = { "/error", "/notFound", "/refused", "/sessions/login" };
 
 	@Autowired
 	private ApplicationStringConfig applicationStringConfig;
