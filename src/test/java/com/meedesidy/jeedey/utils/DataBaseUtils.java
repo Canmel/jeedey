@@ -3,6 +3,8 @@ package com.meedesidy.jeedey.utils;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -94,7 +96,7 @@ public class DataBaseUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
+	
 }
