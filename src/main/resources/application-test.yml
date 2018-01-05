@@ -22,7 +22,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.2.135:3306/jeedeytest?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-    password: 1234
+    password: sunrise
   jpa: 
     show-sql: true
   spring:
