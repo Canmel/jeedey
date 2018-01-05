@@ -184,8 +184,6 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-
-
 		<finalName>spring-application-webapp-boot</finalName>
 	</build>
 </project>
