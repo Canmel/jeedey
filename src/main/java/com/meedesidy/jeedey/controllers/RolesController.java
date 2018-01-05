@@ -68,7 +68,8 @@ public class RolesController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
-	public void export(Model model, BaseEntity role, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
+	public void export(Model model, Role role, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
+		resp.reset();
 		role.setStatus(Status.active);
 		super.export(model, role, roleMap, resp);
 	}

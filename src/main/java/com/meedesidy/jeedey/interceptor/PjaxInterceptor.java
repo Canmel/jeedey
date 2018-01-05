@@ -28,6 +28,11 @@ public class PjaxInterceptor implements HandlerInterceptor {
 
 		boolean isLogin = currentUser != null;
 
+		// 判断是否是需要放过的
+		if (exceptPjaxUrl().contains(request.getRequestURI()) || isExport(request.getRequestURI())) {
+			return true;
+		}
+
 		// 判断是否是根目录
 		boolean isRoot = isRootUrl(request.getRequestURI());
 		if (isRoot) {
@@ -37,11 +42,6 @@ public class PjaxInterceptor implements HandlerInterceptor {
 				response.sendRedirect("/sessions/login");
 				return false;
 			}
-		}
-
-		// 判断是否是需要放过的
-		if (exceptPjaxUrl().contains(request.getRequestURI())) {
-			return true;
 		}
 
 		// 判断是否是Pjax请求
