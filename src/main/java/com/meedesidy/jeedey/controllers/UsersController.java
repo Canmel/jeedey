@@ -73,6 +73,7 @@ public class UsersController extends BaseController {
 		super.export(model, user, userMap, resp);
 	}
 	
+	// 导出excel表头
 	public final static LinkedHashMap<String, String> userMap = new LinkedHashMap<String, String>();
 	static {
 		userMap.put("name", "姓名");
