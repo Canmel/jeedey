@@ -14,4 +14,6 @@ public interface UserMapper extends BaseMapper{
 	public List<User> queryAll(BaseEntity entity);
 	
 	public List<User> loginByEmailAndPassword(User user);
+	
+	public Integer saveUserRoleRalation(User user, List<Integer> roleIds);
 }
