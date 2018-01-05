@@ -19,6 +19,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.User;
+import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
 import com.meedesidy.jeedey.service.BaseService;
 import com.meedesidy.jeedey.utils.ExcelJxlUitl;
@@ -26,36 +27,38 @@ import com.meedesidy.jeedey.utils.ExcelJxlUitl;
 public abstract class BaseController {
 
 	public MessageSource messageSource;
-	
+
 	public void BeanValidatorConfig(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-	
+		this.messageSource = messageSource;
+	}
+
 	public abstract BaseService getService();
-	
+
 	public abstract String getContentPath();
-	
+
 	public PageInfo<BaseEntity> indexData(BaseEntity entity) {
-		PageInfo<BaseEntity> page = PageHelper.startPage(entity.getPageIndex(), entity.getPageSize()).doSelectPageInfo(()-> getService().pageQuery(entity));
+		PageInfo<BaseEntity> page = PageHelper.startPage(entity.getPageIndex(), entity.getPageSize())
+				.doSelectPageInfo(() -> getService().pageQuery(entity));
 		return page;
 	}
-	
-	public PageInfo<BaseEntity> indexData(){
-		PageInfo<BaseEntity> page = PageHelper.startPage(0, 10).doSelectPageInfo(()-> getService().pageQuery(new BaseEntity()));
+
+	public PageInfo<BaseEntity> indexData() {
+		PageInfo<BaseEntity> page = PageHelper.startPage(0, 10)
+				.doSelectPageInfo(() -> getService().pageQuery(new BaseEntity()));
 		return page;
 	}
-	
+
 	public String index(Model model, BaseEntity entity) throws JsonProcessingException {
 		model.addAttribute("pageInfo", indexData(entity));
 		model.addAttribute("searchEntity", entity);
 		return getContentPath() + "/index";
 	}
-	
+
 	public String edit(@PathVariable Integer id, Model model) {
 		model.addAttribute(getOptName(), getService().getEntity(new User(id)));
 		return getContentPath() + "/edit";
 	}
-	
+
 	public String create(Model model, BaseEntity entity) {
 		try {
 			model.addAttribute(getOptName(), entity.getClass().newInstance());
@@ -64,18 +67,22 @@ public abstract class BaseController {
 		}
 		return getContentPath() + "/new";
 	}
-	
+
 	public ModelAndView update(Model model, BaseEntity entity, HttpServletResponse resp) throws IOException {
-		getService().update(entity);
-		resp.sendRedirect("/" + getContentPath() + "?_pjax=[data-pjax-container]");
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("pageInfo", indexData(entity));
+		getService().update(entity);
+		try {
+			mv.addObject("pageInfo", indexData(entity.getClass().newInstance()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		mv.setViewName(getContentPath() + "/index");
 		return mv;
 	}
 
 	@Validated
-	public ModelAndView save(Model model, BaseEntity entity, HttpServletResponse resp, HttpServletRequest req) throws IOException {
+	public ModelAndView save(Model model, BaseEntity entity, HttpServletResponse resp, HttpServletRequest req)
+			throws IOException {
 		ModelAndView mv = new ModelAndView();
 		getService().insert(entity);
 		try {
@@ -86,14 +93,13 @@ public abstract class BaseController {
 		mv.setViewName(getContentPath() + "/index");
 		return mv;
 	}
-	
 
 	public void delete(Model model, Integer id, HttpServletResponse resp) throws IOException {
-		int[] ids = {id};
+		int[] ids = { id };
 		getService().delete(ids);
 		resp.sendRedirect("/" + getContentPath() + "?_pjax=[data-pjax-container]");
 	}
-	
+
 	public ModelAndView getNotValidModelAndView(String viewName, BindingResult result, BaseEntity entity) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName(viewName);
@@ -102,12 +108,13 @@ public abstract class BaseController {
 		mv.addObject(entity.getClass().getSimpleName().toLowerCase(), entity);
 		return mv;
 	}
-	
-	public void export(Model model, BaseEntity entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp) throws IOException, ExcelException{
+
+	public void export(Model model, BaseEntity entity, LinkedHashMap<String, String> userMap, HttpServletResponse resp)
+			throws IOException, ExcelException {
 		ExcelJxlUitl.listToExcel(getService().pageQuery(entity), userMap, "excel", resp);
 	}
-	
+
 	public String getOptName() {
-		return getContentPath().substring(0, getContentPath().length()-1);
+		return getContentPath().substring(0, getContentPath().length() - 1);
 	}
 }

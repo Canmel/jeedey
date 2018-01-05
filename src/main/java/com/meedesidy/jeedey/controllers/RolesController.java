@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.meedesidy.jeedey.entity.BaseEntity;
 import com.meedesidy.jeedey.entity.Role;
 import com.meedesidy.jeedey.entity.enums.Status;
 import com.meedesidy.jeedey.interceptor.exceptions.ExcelException;
@@ -68,6 +69,7 @@ public class RolesController extends BaseController {
 	
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void export(Model model, Role role, HttpServletRequest req, HttpServletResponse resp) throws IOException, ExcelException {
+		resp.reset();
 		role.setStatus(Status.active);
 		super.export(model, role, roleMap, resp);
 	}

@@ -141,7 +141,6 @@ public class ExcelJxlUitl {
 
 			OutputStream out = response.getOutputStream();
 			// 设置response头信息
-			response.reset();
 			response.setContentType("application/x-download; charset=utf-8"); // 改成输出excel文件
 			response.setHeader("Content-disposition", "attachment; filename="+ URLEncoder.encode(fileName + ".xls", "UTF-8"));
 
