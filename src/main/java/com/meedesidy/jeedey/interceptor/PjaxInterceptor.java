@@ -1,5 +1,8 @@
 package com.meedesidy.jeedey.interceptor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,10 +15,10 @@ import org.thymeleaf.util.ArrayUtils;
 import org.thymeleaf.util.StringUtils;
 
 import com.meedesidy.jeedey.config.ApplicationStringConfig;
+import com.meedesidy.jeedey.entity.User;
+import com.netflix.infix.lang.infix.antlr.EventFilterParser.boolean_expr_return;
 
 public class PjaxInterceptor implements HandlerInterceptor {
-
-	private static String[] DEFINE_PATH = { "/error", "/notFound", "/refused", "/sessions/login" };
 
 	@Autowired
 	private ApplicationStringConfig applicationStringConfig;
@@ -23,16 +26,31 @@ public class PjaxInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
-		System.out.println("请求:　　" + request.getMethod() + request.getRequestURI().toString());
-		applicationStringConfig = (ApplicationStringConfig) factory.getBean("getApplicationStringConfig");
-		// 当请求地址是已知的DEFINE_PATH中定义的地址时，允许返回true
-		if (ArrayUtils.contains(DEFINE_PATH, request.getRequestURI().toString()) || isExport(request.getRequestURI().toString())) {
+		System.out.println(request.getRequestURI());
+
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+
+		boolean isLogin = currentUser != null;
+
+		// 判断是否是根目录
+		boolean isRoot = isRootUrl(request.getRequestURI());
+		if (isRoot) {
+			if (isLogin) {
+				return true;
+			} else {
+				response.sendRedirect("/sessions/login");
+				return false;
+			}
+		}
+
+		// 判断是否是需要放过的
+		if (exceptPjaxUrl().contains(request.getRequestURI())) {
 			return true;
-		}else if (!isPjaxRequest(request)
-				&& !request.getRequestURI().toString().equals(applicationStringConfig.getContent_path())) {
-			// 当请求不是一个pjax请求并且不是主项目目录重定向出去到项目根目录
-			response.sendRedirect(applicationStringConfig.getContent_path());
+		}
+
+		// 判断是否是Pjax请求
+		if (!isPjaxRequest(request)) {
+			response.sendRedirect("/error");
 		}
 		return true;
 	}
@@ -49,20 +67,41 @@ public class PjaxInterceptor implements HandlerInterceptor {
 
 	/**
 	 * 判断是否是一个Pjax请求
+	 * 
 	 * @param request
 	 * @return
 	 */
 	private boolean isPjaxRequest(HttpServletRequest request) {
 		return !StringUtils.isEmpty(request.getParameter("_pjax"));
 	}
-	
+
 	/**
 	 * 判断是否是一个导出请求
-	 * @param url 
+	 * 
+	 * @param url
 	 * @return
 	 */
 	private boolean isExport(String url) {
 		return url.endsWith("export");
 	}
 
+	/**
+	 * 判断是否是一个根目录
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private boolean isRootUrl(String url) {
+		return url.equals("/");
+	}
+
+	public List<String> exceptPjaxUrl() {
+		List<String> list = new ArrayList<String>();
+
+		list.add("/error");
+		list.add("/sessions/login");
+		list.add("/sessions/logout");
+		list.add("/sessions");
+		return list;
+	}
 }

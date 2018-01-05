@@ -9,6 +9,8 @@ public class User extends BaseEntity{
 	@Email
 	private String email;
 	
+	private String password;
+	
 	@Pattern(regexp="^1[3|4|5|8][0-9]\\d{4,8}$", message="请输入正确的手机号码")
 	private String phone;
 
@@ -19,6 +21,14 @@ public class User extends BaseEntity{
 		this.phone = phone;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User() {
 	}
 

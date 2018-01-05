@@ -1,5 +1,8 @@
 package com.meedesidy.jeedey.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 
 public class ApplicationStringConfig {
