@@ -11,3 +11,8 @@ TRUNCATE TABLE roles;
 insert into roles(name, description, status) values("admin", "admin", 1);
 insert into roles(name, description, status) values("manager", "manager", 1);
 insert into roles(name, description, status) values("general", "general", 0);
+
+TRUNCATE TABLE menus;
+insert into menus(name, level, description, status) values("admin", "1", "admin", 1);
+insert into menus(name, level, description, status) values("manager", "1", "manager", 1);
+insert into menus(name, level, description, status) values("general", "1", "general", 0);
