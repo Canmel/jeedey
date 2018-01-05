@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.ibatis.common.jdbc.ScriptRunner;
 import com.ibatis.common.resources.Resources;
+import com.meedesidy.jeedey.entity.User;
 import com.mysql.jdbc.Connection;
 
 @Component
@@ -96,5 +97,26 @@ public class DataBaseUtils {
 		}
 		
 		return result;
+	}
+	
+	public User getFirstUser() {
+		User user = null;
+		try {
+			Class.forName(driver).newInstance();  
+			Connection conn = (Connection) DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = conn.clientPrepareStatement("select name, email, phone from users where 1=1 order by id desc limit 1");
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				user = new User(rs.getString("name"), rs.getString("email"), rs.getString("phone"));
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+		
+
 	}
 }

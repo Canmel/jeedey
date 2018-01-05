@@ -25,7 +25,7 @@ public class JeedesidyConfig extends WebMvcConfigurerAdapter {
 	public ValidatorAspect getValidatorAspect() {
 		return new ValidatorAspect();
 	}
-	
+
 	@Bean
 	public PageHelper getPageHelper() {
 		PageHelper pageHelper = new PageHelper();
