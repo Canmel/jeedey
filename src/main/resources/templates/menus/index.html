@@ -68,9 +68,9 @@
 						<td th:text="${menu.resource}" class="hidden-phone ">462</td>
 						<td><a class="edit"
 							th:href="@{/menus/{menuId}/edit(menuId=${menu.id})}"><span
-								class="label label-success">修改</span></a> <a data-method="get"
-							class="delete" th:value="@{/menus/{menuId}(menuId=${menu.id})}"
-							confirm="确定删除?"><span class="label label-danger">删除</span></a></td>
+								class="label label-success">修改</span></a> 
+								<a method="DELETE" class="delete" th:href="@{/menus/{menuId}(menuId=${menu.id})}"  onclick="if(confirm('确定删除?')==false)return false;"><span class="label label-danger" style="cursor:pointer">删除</span></a>
+								</td>
 					</tr>
 				</tbody>
 			</table>
