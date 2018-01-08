@@ -29,6 +29,8 @@ $(function() {
 			}
 			window.open(h, '_blank');
 		});
+		
+//		treeBtnEnvent();
 	});
 
 });
@@ -47,4 +49,34 @@ function pget(met, url, conf) {
 		method : met == null ? "get" : met,
 		container : '.wrapper'
 	});
+}
+
+
+function treeBtnEnvent(){
+	// Expand/collapse/toggle nodes
+    $('#input-disable-node').on('keyup', function (e) {
+      disabledNodes = findDisabledNodes();
+      $('.disable-node').prop('disabled', !(disabledNodes.length >= 1));
+    });
+
+    $('#btn-disable-node.disable-node').on('click', function (e) {
+      $disabledTree.treeview('disableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+    });
+
+    $('#btn-enable-node.disable-node').on('click', function (e) {
+      $disabledTree.treeview('enableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+    });
+
+    $('#btn-toggle-disabled.disable-node').on('click', function (e) {
+      $disabledTree.treeview('toggleNodeDisabled', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+    });
+
+    // Expand/collapse all
+    $('#btn-disable-all').on('click', function (e) {
+      $disabledTree.treeview('disableAll', { silent: $('#chk-disable-silent').is(':checked') });
+    });
+
+    $('#btn-enable-all').on('click', function (e) {
+      $disabledTree.treeview('enableAll', { silent: $('#chk-disable-silent').is(':checked') });
+    });
 }

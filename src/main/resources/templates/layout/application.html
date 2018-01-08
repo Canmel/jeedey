@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta content="text/html;charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link th:href="@{css/bootstrap-theme.min.css}" rel="stylesheet" />
 <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
@@ -12,71 +12,89 @@
 <link th:href="@{css/style-responsive.css}" rel="stylesheet" />
 <link th:href="@{css/morris.css}" rel="stylesheet" />
 <link th:href="@{css/clndr.css}" rel="stylesheet" />
+<link th:href="@{css/sweetalert.css}" rel="stylesheet" />
+<style type="text/css">
+.jq22-header {
+	margin-bottom: 15px;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial,
+		"Microsoft YaHei", FreeSans, Arimo, "Droid Sans",
+		"wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3",
+		"FontAwesome", sans-serif;
+}
+
+.jq22-icon {
+	color: #fff;
+}
+</style>
 <title>Meedesidy</title>
 </head>
 <body>
-<section id="container">
-      <div th:replace="layout/header :: header"></div>
-      <!-- BEGIN SIDEBAR -->
-      <aside>
-        <div id="sidebar" class="nav-collapse">
-          <ul class="sidebar-menu" id="nav-accordion">
-            <li >
-              <a href="index.html" class="active">
-                <i class="fa fa-dashboard">
-                </i>
-                <span>
-                  Dashboard
-                </span>
-              </a>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                <i class="fa fa-laptop"></i>
-                <span>系统管理</span>
-                <span class="label label-success span-sidebar">4</span>
-                </a>
-                <ul class="sub">
-                   <li><a href="/users">用户信息维护</a></li>
-                   <li><a href="/roles">角色信息维护</a></li>
-                   <li><a href="/menus">菜单信息维护</a></li>
-                   <li><a href="email_template.html" target="_blank">Email Templates</a></li>
-                </ul>
-             </li>
-          </ul>
-        </div>
-      </aside>
-      <!-- END SIDEBAR -->
-      <!-- BEGIN MAIN CONTENT -->
-      <section id="main-content">
-      	<section class="wrapper" data-pjax-container="true" ></section>
-      </section>
-<!--       <div th:replace="layout/footer :: footer"></div> -->
-    </section>
-<script type="text/javascript" th:src="@{javascripts/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/application.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.pjax-1.8.2.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.dcjqaccordion.2.7.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.nicescroll.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.scrollTo.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/respond.min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.sparkline.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/sparkline-chart.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/common-scripts.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/count.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/raphael-min.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/clndr.js}"></script>
-<!-- <script type="text/javascript" th:src="@{javascripts/morris.min.js}"></script> -->
-<!-- <script type="text/javascript" th:src="@{javascripts/chart.js}"></script> -->
-<script type="text/javascript" th:src="@{javascripts/evnt.calendar.init.js}"></script>
-<script type="text/javascript" th:src="@{javascripts/moment-2.2.1.js}"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-<script type="text/javascript" th:src="@{javascripts/jquery.knob.js}"></script>
-<script th:src="@{javascripts/jquery.page.js}"></script>
-<script >
-   //knob
-   $(".knob").knob();
-</script>
+	<section id="container">
+		<div th:replace="layout/header :: header"></div>
+		<!-- BEGIN SIDEBAR -->
+		<aside>
+			<div id="sidebar" class="nav-collapse">
+				<ul class="sidebar-menu" id="nav-accordion">
+					<li><a href="index.html" class="active"> <i
+							class="fa fa-dashboard"> </i> <span> Dashboard </span>
+					</a></li>
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-laptop"></i> <span>系统管理</span> <span
+							class="label label-success span-sidebar">4</span>
+					</a>
+						<ul class="sub">
+							<li><a href="/users">用户信息维护</a></li>
+							<li><a href="/roles">角色信息维护</a></li>
+							<li><a href="/menus">菜单信息维护</a></li>
+							<li><a href="email_template.html" target="_blank">Email
+									Templates</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</aside>
+		<!-- END SIDEBAR -->
+		<!-- BEGIN MAIN CONTENT -->
+		<section id="main-content">
+			<section class="wrapper" data-pjax-container="true"></section>
+		</section>
+		<!--       <div th:replace="layout/footer :: footer"></div> -->
+	</section>
+	<script type="text/javascript" th:src="@{javascripts/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/application.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/jquery.pjax-1.8.2.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/jquery.dcjqaccordion.2.7.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/jquery.nicescroll.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/jquery.scrollTo.min.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/respond.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/jquery.sparkline.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/sparkline-chart.js}"></script>
+	<script type="text/javascript"
+		th:src="@{javascripts/common-scripts.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/count.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/raphael-min.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/clndr.js}"></script>
+	<!-- <script type="text/javascript" th:src="@{javascripts/morris.min.js}"></script> -->
+	<!-- <script type="text/javascript" th:src="@{javascripts/chart.js}"></script> -->
+	<script type="text/javascript"
+		th:src="@{javascripts/evnt.calendar.init.js}"></script>
+	<script type="text/javascript" th:src="@{javascripts/moment-2.2.1.js}"></script>
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+	<script type="text/javascript" th:src="@{javascripts/jquery.knob.js}"></script>
+	<script th:src="@{javascripts/jquery.page.js}"></script>
+	<script th:src="@{javascripts/bootstrap-treeview.js}"></script>
+	<script th:src="@{javascripts/tree.js}"></script>
+	<script th:src="@{javascripts/sweetalert.min.js}"></script>
+	<script>
+		//knob
+		$(".knob").knob();
+	</script>
 </body>
 </html>
