@@ -56,7 +56,7 @@ public class UsersController extends BaseController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView save(Model model, @Valid User user, BindingResult result, HttpServletResponse resp,
 			HttpServletRequest req) throws IOException {
-		if (result.hasErrors()) {
+		if (result.hasErrors()) { 
 			return getNotValidModelAndView(getContentPath() + "/new", result, user);
 		}
 		return super.save(model, user, resp, req);
