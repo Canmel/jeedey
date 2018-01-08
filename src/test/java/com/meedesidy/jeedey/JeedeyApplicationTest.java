@@ -33,6 +33,7 @@ public class JeedeyApplicationTest extends AbstractJUnit4SpringContextTests {
 	
 	@Before
 	public void setUp() throws Exception {
+		dataBaseUtils.runSchema();
 		dataBaseUtils.runInitScript();
 		session.setAttribute("currentUser", dataBaseUtils.getFirstUser());
 	}
